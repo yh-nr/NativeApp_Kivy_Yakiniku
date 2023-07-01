@@ -1,0 +1,38 @@
+Screen: 
+    name: 'Page3'
+    on_pre_leave:camerapreview.camera_release()
+    CameraPreview:
+        id:camerapreview
+        camera:camera
+        orientation: 'vertical'
+        size: root.size
+        Image:
+            id: camera
+            size: root.size
+        # ImageButton:
+        #     source: 'data/cameraicon.png'
+        #     size: 75, 75
+        #     center: root.width * 0.5, root.height * 0.1
+        #     on_press:camerapreview.play(-2)
+        # ImageButton:
+        #     source: 'data/cameraicon.png'
+        #     size: 75, 75
+        #     center: root.width * 0.5, root.height * 0.2
+        #     on_press:camerapreview.play(-1)
+        ImageButton:
+            source: 'data/cameraicon.png'
+            size: 75, 75
+            center: root.width * 0.5, root.height * 0.1
+            on_press:camerapreview.play(0)
+        # ImageButton:
+        #     source: 'data/cameraicon.png'
+        #     size: 75, 75
+        #     center: root.width * 0.5, root.height * 0.4
+        #     on_press:camerapreview.play(1)
+        # ImageButton:
+        #     source: 'data/cameraicon.png'
+        #     size: 75, 75
+        #     center: root.width * 0.5, root.height * 0.5
+        #     on_press:camerapreview.play(2)
+        
+

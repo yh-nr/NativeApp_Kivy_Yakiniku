@@ -1,0 +1,33 @@
+<ImageWidget>:
+    canvas.before:
+        Color:
+            rgba: 0.6, 0.6, 0.6, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+
+<DefaultPage@Screen>:
+    ImageWidget:
+        id: iw_yakiniku
+        BoxLayout:
+            orientation: 'vertical'
+            size: root.size
+
+            Image:
+                source: iw_yakiniku.source
+
+            BoxLayout:
+                size_hint_y: 0.3
+                padding: 20,30,20,10
+                
+                Button:
+                    id: button1
+                    text: "初期画像"
+                    font_size: 30
+                    on_press: iw_yakiniku.buttonStarted()
+                Button:
+                    id: button2
+                    text: "ランダム表示"
+                    font_size: 30
+                    on_press: iw_yakiniku.buttonRandom()

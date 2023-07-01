@@ -1,0 +1,49 @@
+#: import FadeTransition kivy.uix.screenmanager.FadeTransition
+#: include src/DefaultPage.kv
+
+<AppFrame>:
+    screen_manager: sm
+    orientation: 'vertical'
+    Label:
+        id: title_label
+        text:"焼き肉画像ランダム表示アプリ"
+        font_size: 30
+        size_hint_y: 0.1
+        canvas.before:
+            Color:
+                rgba: 0, 0, 0, 1 # 赤色を指定
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+    ScreenManager:
+        id: sm
+        DefaultPage:
+            name:'DefaultPage'
+
+    BoxLayout:
+        size_hint: 1, 0.2
+    
+        Button:
+            text: "Page1へ"
+            font_size: 30
+            on_press:
+                title_label.text = "焼き肉写真ランダム表示"
+                sm.transition = FadeTransition()
+                root.switch2page("Page1")
+
+        Button:
+            text: "Page2へ"
+            font_size: 30
+            on_press:
+                title_label.text = "カメラ動作テスト"
+                sm.transition = FadeTransition()
+                root.switch2page("Page2")
+
+        Button:
+            text: "Page3へ"
+            font_size: 30
+            on_press:
+                title_label.text = "OpenCVでカメラ動かす"
+                sm.transition = FadeTransition()
+                root.switch2page("Page3")
