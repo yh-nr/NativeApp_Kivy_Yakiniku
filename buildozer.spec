@@ -38,7 +38,7 @@ version = 0.11
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
 # requirements = Python3, kivy==2.2.0, cython, japanize_kivy, plyer, pyjnius, numpy, opencv==4.7.0, torch, torchvision, pytorch_lightning, pillow
-requirements = Python3, kivy==2.2.0, cython, japanize_kivy, plyer, pyjnius, numpy, opencv==4.7.0
+requirements = Python3, kivy==2.2.0, cython, japanize_kivy, plyer, pyjnius, numpy, opencv==4.5.1
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
