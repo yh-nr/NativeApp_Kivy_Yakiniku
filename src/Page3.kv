@@ -2,7 +2,7 @@ Screen:
     name: 'Page3'
     on_enter:camerapreview.connect_camera(enable_analyze_pixels = True, enable_video = False)
     on_pre_leave:camerapreview.disconnect_camera()
-    size:960,480
+    size:480, 960
     CameraPreview:
         id:camerapreview
         # camera:camera
@@ -15,10 +15,10 @@ Screen:
         center: root.width * 0.7, root.height * 0.1
         on_press:camerapreview.play()
 
-    ImageButton:
-        source: 'data/cameraicon.png'
-        size: 50, 50
-        center: root.width * 0.3, root.height * 0.1
-        on_press:camerapreview.capture_screenshot()
+    # ImageButton:
+    #     source: 'data/cameraicon.png'
+    #     size: 50, 50
+    #     center: root.width * 0.3, root.height * 0.1
+    #     on_press:camerapreview.capture_screenshot()
         
 
