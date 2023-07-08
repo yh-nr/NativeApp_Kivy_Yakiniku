@@ -13,7 +13,7 @@ package.domain = com.yh_nr.kivyapps
 source.dir = .
 
 # (list) Source files to include (let empty to include all the files)
-source.include_exts = py,png,jpg,kv,atlas
+source.include_exts = py,png,jpg,kv,atlas,tflite
 
 # (list) List of inclusions using pattern matching
 #source.include_patterns = assets/*,images/*.png
@@ -26,7 +26,7 @@ source.include_exts = py,png,jpg,kv,atlas
 
 # (list) List of exclusions using pattern matching
 # Do not prefix with './'
-#source.exclude_patterns = license,images/*/*.jpg
+source.exclude_patterns = object_detection/efficient*.tflite
 
 # (str) Application versioning (method 1)
 version = 0.11
@@ -102,10 +102,10 @@ android.permissions = CAMERA,READ_EXTERNAL_STORAGE,WRITE_EXTERNAL_STORAGE
 #android.features = android.hardware.usb.host
 
 # (int) Target Android API, should be as high as possible.
-#android.api = 31
+android.api = 33
 
 # (int) Minimum API your APK / AAB will support.
-android.minapi = 22
+# android.minapi = 22
 
 # (int) Android SDK version to use
 #android.sdk = 20
@@ -114,7 +114,7 @@ android.minapi = 22
 #android.ndk = 23b
 
 # (int) Android NDK API to use. This is the minimum API your app will support, it should usually match android.minapi.
-android.ndk_api = 22
+# android.ndk_api = 22
 
 # (str) Android NDK directory (if empty, it will be automatically downloaded.)
 #android.ndk_path =
@@ -284,7 +284,7 @@ android.ndk_api = 22
 
 # (list) The Android archs to build for, choices: armeabi-v7a, arm64-v8a, x86, x86_64
 # In past, was `android.arch` as we weren't supporting builds for multiple archs at the same time.
-android.archs = arm64-v8a, armeabi-v7a
+android.archs = arm64-v8a
 
 # (int) overrides automatic versionCode computation (used in build.gradle)
 # this is not the same as app version and should only be edited if you know what you're doing
@@ -334,7 +334,7 @@ android.allow_backup = True
 #p4a.local_recipes =
 
 # (str) Filename to the hook for p4a
-#p4a.hook =
+p4a.hook = camerax_provider/gradle_options.py
 
 # (str) Bootstrap to use for android builds
 # p4a.bootstrap = sdl2
