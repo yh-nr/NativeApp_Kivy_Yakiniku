@@ -2,6 +2,7 @@ Screen:
     name: 'Page3'
     on_enter:camerapreview.connect_camera(enable_analyze_pixels = True, enable_video = False)
     on_pre_leave:camerapreview.disconnect_camera()
+    size:960,480
     CameraPreview:
         id:camerapreview
         # camera:camera
