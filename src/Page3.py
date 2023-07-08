@@ -29,11 +29,10 @@ class CameraPreview(Preview):
         Flg = not Flg
         show_toast(f'{Flg}だよう')
 
-        # if Flg == True:
-        #     self.connect_camera(enable_analyze_pixels = True, enable_video = False)
+        if Flg == True:
+            self.connect_camera(enable_analyze_pixels = True, enable_video = False)
 
-
-        # else:self.disconnect_camera()
+        else:self.disconnect_camera()
 
 
         
