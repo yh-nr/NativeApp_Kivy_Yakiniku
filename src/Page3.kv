@@ -2,23 +2,40 @@ Screen:
     name: 'Page3'
     on_enter:camerapreview.connect_camera(enable_analyze_pixels = True, enable_video = False)
     on_pre_leave:camerapreview.disconnect_camera()
-    size:480, 960
-    CameraPreview:
-        id:camerapreview
-        # camera:camera
-        orientation: 'vertical'
-        size: root.size
 
-    ImageButton:
-        source: 'data/cameraicon.png'
-        size: 75, 75
-        center: root.width * 0.7, root.height * 0.1
-        on_press:camerapreview.play()
+    CameraWidget:
+        CameraPreview:
+            id:camerapreview
+            # camera:camera
+            orientation: 'vertical'
+            size: root.size
 
-    # ImageButton:
-    #     source: 'data/cameraicon.png'
-    #     size: 50, 50
-    #     center: root.width * 0.3, root.height * 0.1
-    #     on_press:camerapreview.capture_screenshot()
-        
+        ImageButton:
+            source: 'data/cameraicon.png'
+            size: 50, 50
+            center: root.width * 0.7, root.height * 0.1
+            on_press:camerapreview.play()
+            Label:
+                text: "I/O"
+                color: 'black'
+                font_size: 30   
+
+        ImageButton:
+            source: 'data/cameraicon.png'
+            text: 'ｽｸｼｮ'
+            size: 50, 50
+            center: root.width * 0.5, root.height * 0.1
+            on_press:camerapreview.capture_screenshot()
+
+        ImageButton:
+            source: 'data/cameraicon.png'
+            text: '写真'
+            size: 50, 50
+            center: root.width * 0.3, root.height * 0.1
+            on_press:camerapreview.capture_photo()
+
+
+
+<CameraWidget@Widget>:
+            
 
