@@ -55,7 +55,7 @@ Screen:
             text: '写真'
             size: 50, 50
             center: root.width * 0.3, root.height * 0.5
-            on_press:camerapreview.capture_photo(subdir='1\\3')
+            on_press:camerapreview.capture_photo(subdir='1\\3', filepath_callback = show_toast())
 #Androidでは1_3が作られる
 
 
