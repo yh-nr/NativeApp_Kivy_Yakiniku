@@ -12,9 +12,6 @@ from .func import SavePic, show_toast
 from camera4kivy import Preview
 
 
-
-
-
 class CameraPreview(Preview):
     image_texture = ObjectProperty(None)
     image_capture = ObjectProperty(None)
@@ -33,13 +30,6 @@ class CameraPreview(Preview):
             self.disconnect_camera()
 
 
-        
-
-
 # 撮影ボタン
 class ImageButton(ButtonBehavior, Image):
     pass
-
-
-Flg = False
-print(f'{Flg}だよう')
