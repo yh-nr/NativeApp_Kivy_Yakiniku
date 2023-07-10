@@ -55,7 +55,7 @@ def SavePic(camera, timestr):
 def show_toast(message):
         notification.notify(
             message=message,
-            timeout=15,
+            timeout=1,
             toast=True
         )
 

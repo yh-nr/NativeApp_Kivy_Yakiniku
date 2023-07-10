@@ -25,14 +25,14 @@ class CameraPreview(Preview):
         pass
  
     def play(self):
-        global Flg
-        Flg = not Flg
-        show_toast(f'{Flg}だよう')
+        
 
-        if Flg == True:
+        if self.camera_connected == False:
+            show_toast('カメラへの接続を試みます')
             self.connect_camera(enable_analyze_pixels = True, enable_video = False)
-
-        else:self.disconnect_camera()
+        else:
+            show_toast('カメラを切断します')
+            self.disconnect_camera()
 
 
         
