@@ -25,8 +25,6 @@ class CameraPreview(Preview):
         pass
  
     def play(self):
-        
-
         if self.camera_connected == False:
             show_toast('カメラへの接続を試みます')
             self.connect_camera(enable_analyze_pixels = True, enable_video = False)

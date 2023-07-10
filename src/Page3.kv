@@ -34,6 +34,23 @@ Screen:
             center: root.width * 0.3, root.height * 0.1
             on_press:camerapreview.capture_photo()
 
+        ImageButton:
+            source: 'data/cameraicon.png'
+            size: 50, 50
+            center: root.width * 0.7, root.height * 0.2
+            on_press:camerapreview.connect_camera()
+            Label:
+                text: "I/O"
+                color: 'black'
+                font_size: 30   
+
+        ImageButton:
+            source: 'data/cameraicon.png'
+            text: '写真'
+            size: 50, 50
+            center: root.width * 0.3, root.height * 0.2
+            on_press:camerapreview.disconnect_camera()
+
 
 
 <CameraWidget@Widget>:
