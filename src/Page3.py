@@ -35,7 +35,9 @@ class CameraPreview(Preview):
         t_delta = datetime.timedelta(hours=9)
         JST = datetime.timezone(t_delta, 'JST')
         now = datetime.datetime.now(JST)
-        #windowsの場合に、subdir1が存在するかチェック       
+
+        #windowsの場合に、subdir1が存在するかチェックするコードをここに入れる       
+
         subdir = subdir1 + '/' + subdir2
         name = f'img{now:%y%m%d%H%M%S%f}'[:-3]
         self.capture_photo(subdir=subdir ,name=name)
