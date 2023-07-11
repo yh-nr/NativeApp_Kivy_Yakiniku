@@ -11,6 +11,8 @@ from os.path import dirname, join
 from .func import SavePic, show_toast
 from camera4kivy import Preview
 
+import datetime
+
 
 class CameraPreview(Preview):
     image_texture = ObjectProperty(None)
@@ -30,8 +32,13 @@ class CameraPreview(Preview):
             self.disconnect_camera()
 
     def capture_button(self,subdir1,subdir2):
+        t_delta = datetime.timedelta(hours=9)
+        JST = datetime.timezone(t_delta, 'JST')
+        now = datetime.datetime.now(JST)
+
+        
         subdir = subdir1 + '/' + subdir2
-        name = 'img'
+        name = f'img{now:%y%m%d%H%M}'
         self.capture_photo(subdir=subdir ,name=name)
         pass
     
