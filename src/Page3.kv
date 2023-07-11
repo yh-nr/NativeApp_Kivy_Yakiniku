@@ -1,6 +1,6 @@
 Screen: 
     name: 'Page3'
-    on_enter:camerapreview.connect_camera(enable_analyze_pixels = True, enable_video = False)
+    on_enter:camerapreview.connect_camera(enable_analyze_pixels = True, enable_video = False, filepath_callback = camerapreview.show_toast2)
     on_pre_leave:camerapreview.disconnect_camera()
 
     CameraWidget:
@@ -33,7 +33,7 @@ Screen:
                     camerapreview.capture_photo(subdir=subdir)
 
             Button:
-                text: '[1]カルビ'
+                text: '[1]ロース'
                 background_color: 1,1,1,0
                 color: 1,1,1,.8
                 font_size:35
@@ -44,7 +44,7 @@ Screen:
                     camerapreview.capture_photo(subdir=subdir)
 
             Button:
-                text: '[2]カルビ'
+                text: '[2]ハラミ'
                 background_color: 1,1,1,0
                 color: 1,1,1,.8
                 font_size:35
@@ -66,7 +66,7 @@ Screen:
                     camerapreview.capture_photo(subdir=subdir)
 
             Button:
-                text: '[4]カルビ'
+                text: '[4]タン'
                 background_color: 1,1,1,0
                 color: 1,1,1,.8
                 font_size:35
@@ -149,9 +149,7 @@ Screen:
                 font_size:35
                 bold:True
                 center: root.width * 0.3, root.height * 0.3
-                on_press:
-                    subdir = 'Yakiniku/11'
-                    camerapreview.capture_photo(subdir=subdir)
+                on_press:camerapreview.capture_button('Yakiniku','11')
 
 
 

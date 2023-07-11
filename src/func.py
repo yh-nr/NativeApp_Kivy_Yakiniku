@@ -62,7 +62,6 @@ def show_toast(message):
 
 
 
-
 # // Defines a new Uri object that receives the result of the insertion
 # Uri newUri;
  

@@ -24,10 +24,20 @@ class CameraPreview(Preview):
     def play(self):
         if self.camera_connected == False:
             show_toast('カメラへの接続を試みます')
-            self.connect_camera(enable_analyze_pixels = True, enable_video = False)
+            self.connect_camera(enable_analyze_pixels = True, enable_video = False, filepath_callback = show_toast)
         else:
             show_toast('カメラを切断します')
             self.disconnect_camera()
+
+    def capture_button(self,subdir1,subdir2):
+        subdir = subdir1 + '/' + subdir2
+        name = 'img'
+        self.capture_photo(subdir=subdir ,name=name)
+        pass
+    
+    def show_toast2(self, message):
+        show_toast(message)
+
 
 
 # 撮影ボタン

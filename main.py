@@ -51,7 +51,6 @@ class YakinikuApp(App):
         return AppFrame()
 
 
-
 if __name__ == '__main__':                      #main.pyが直接実行されたら、、、という意味らしい
     YakinikuApp().run()                         #
 
