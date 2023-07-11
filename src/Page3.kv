@@ -9,54 +9,150 @@ Screen:
             # camera:camera
             orientation: 'vertical'
             size: root.size
+        GridLayout:
+            rows:4
+            cols:3
+            size: root.size
+            # Button:
+            #     text: "I/O"
+            #     background_color: 1,1,1,0
+            #     color: 1,1,1,1
+            #     font_size:35
+            #     bold:True
+            #     on_press:camerapreview.play()
 
-        ImageButton:
-            source: 'data/cameraicon.png'
-            size: 50, 50
-            center: root.width * 0.7, root.height * 0.1
-            on_press:camerapreview.play()
-            Label:
-                text: "I/O"
-                color: 'black'
-                font_size: 30   
+            Button:
+                text: '[0]カルビ'
+                background_color: 1,1,1,0
+                color: 1,1,1,.8
+                font_size:35
+                bold:True
+                center: root.width * 0.3, root.height * 0.3
+                on_press:
+                    subdir = 'Yakiniku/0'
+                    camerapreview.capture_photo(subdir=subdir)
 
-        ImageButton:
-            source: 'data/cameraicon.png'
-            text: 'ｽｸｼｮ'
-            size: 50, 50
-            center: root.width * 0.5, root.height * 0.1
-            on_press:camerapreview.capture_screenshot()
+            Button:
+                text: '[1]カルビ'
+                background_color: 1,1,1,0
+                color: 1,1,1,.8
+                font_size:35
+                bold:True
+                center: root.width * 0.3, root.height * 0.3
+                on_press:
+                    subdir = 'Yakiniku/1'
+                    camerapreview.capture_photo(subdir=subdir)
 
-        ImageButton:
-            source: 'data/cameraicon.png'
-            text: '写真'
-            size: 50, 50
-            center: root.width * 0.3, root.height * 0.1
-            on_press:camerapreview.capture_photo(subdir='1')
+            Button:
+                text: '[2]カルビ'
+                background_color: 1,1,1,0
+                color: 1,1,1,.8
+                font_size:35
+                bold:True
+                center: root.width * 0.3, root.height * 0.3
+                on_press:
+                    subdir = 'Yakiniku/2'
+                    camerapreview.capture_photo(subdir=subdir)
 
-        ImageButton:
-            source: 'data/cameraicon.png'
-            text: '写真'
-            size: 50, 50
-            center: root.width * 0.3, root.height * 0.3
-            on_press:camerapreview.capture_photo(subdir='1/3')
-#Androidでは1¥3が作られる
+            Button:
+                text: '[3]カルビ'
+                background_color: 1,1,1,0
+                color: 1,1,1,.8
+                font_size:35
+                bold:True
+                center: root.width * 0.3, root.height * 0.3
+                on_press:
+                    subdir = 'Yakiniku/3'
+                    camerapreview.capture_photo(subdir=subdir)
 
-        ImageButton:
-            source: 'data/cameraicon.png'
-            text: '写真'
-            size: 50, 50
-            center: root.width * 0.3, root.height * 0.4
-            on_press:camerapreview.capture_photo(subdir='1\3')
-#Androidでは1_が作られる
+            Button:
+                text: '[4]カルビ'
+                background_color: 1,1,1,0
+                color: 1,1,1,.8
+                font_size:35
+                bold:True
+                center: root.width * 0.3, root.height * 0.3
+                on_press:
+                    subdir = 'Yakiniku/4'
+                    camerapreview.capture_photo(subdir=subdir)
 
-        ImageButton:
-            source: 'data/cameraicon.png'
-            text: '写真'
-            size: 50, 50
-            center: root.width * 0.3, root.height * 0.5
-            on_press:camerapreview.capture_photo(subdir='1\\3', filepath_callback = show_toast())
-#Androidでは1_3が作られる
+            Button:
+                text: '[5]カルビ'
+                background_color: 1,1,1,0
+                color: 1,1,1,.8
+                font_size:35
+                bold:True
+                center: root.width * 0.3, root.height * 0.3
+                on_press:
+                    subdir = 'Yakiniku/5'
+                    camerapreview.capture_photo(subdir=subdir)
+
+            Button:
+                text: '[6]カルビ'
+                background_color: 1,1,1,0
+                color: 1,1,1,.8
+                font_size:35
+                bold:True
+                center: root.width * 0.3, root.height * 0.3
+                on_press:
+                    subdir = 'Yakiniku/6'
+                    camerapreview.capture_photo(subdir=subdir)
+
+            Button:
+                text: '[7]カルビ'
+                background_color: 1,1,1,0
+                color: 1,1,1,.8
+                font_size:35
+                bold:True
+                center: root.width * 0.3, root.height * 0.3
+                on_press:
+                    subdir = 'Yakiniku/7'
+                    camerapreview.capture_photo(subdir=subdir)
+
+            Button:
+                text: '[8]カルビ'
+                background_color: 1,1,1,0
+                color: 1,1,1,.8
+                font_size:35
+                bold:True
+                center: root.width * 0.3, root.height * 0.3
+                on_press:
+                    subdir = 'Yakiniku/8'
+                    camerapreview.capture_photo(subdir=subdir)
+
+            Button:
+                text: '[9]カルビ'
+                background_color: 1,1,1,0
+                color: 1,1,1,.8
+                font_size:35
+                bold:True
+                center: root.width * 0.3, root.height * 0.3
+                on_press:
+                    subdir = 'Yakiniku/9'
+                    camerapreview.capture_photo(subdir=subdir)
+
+            Button:
+                text: '[10]カルビ'
+                background_color: 1,1,1,0
+                color: 1,1,1,.8
+                font_size:35
+                bold:True
+                center: root.width * 0.3, root.height * 0.3
+                on_press:
+                    subdir = 'Yakiniku/10'
+                    camerapreview.capture_photo(subdir=subdir)
+
+            Button:
+                text: '[11]カルビ'
+                background_color: 1,1,1,0
+                color: 1,1,1,.8
+                font_size:35
+                bold:True
+                center: root.width * 0.3, root.height * 0.3
+                on_press:
+                    subdir = 'Yakiniku/11'
+                    camerapreview.capture_photo(subdir=subdir)
+
 
 
 <CameraWidget@Widget>:
