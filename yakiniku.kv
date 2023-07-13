@@ -25,25 +25,18 @@
         size_hint: 1, 0.2
     
         Button:
-            text: "Page1へ"
+            text: "HOME"
             font_size: 30
             on_press:
                 title_label.text = "焼き肉写真ランダム表示"
                 sm.transition = FadeTransition()
-                root.switch2page("Page1")
+                root.switch2page("HomePage")
 
         Button:
-            text: "Page2へ"
+            text: "カメラ"
             font_size: 30
             on_press:
-                title_label.text = "カメラ動作テスト"
+                title_label.text = "カメラ"
                 sm.transition = FadeTransition()
-                root.switch2page("Page2")
+                root.switch2page("CamPage")
 
-        Button:
-            text: "Page3へ"
-            font_size: 30
-            on_press:
-                title_label.text = "C4Kでカメラを動かす"
-                sm.transition = FadeTransition()
-                root.switch2page("Page3")

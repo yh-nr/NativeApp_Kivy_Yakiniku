@@ -12,9 +12,8 @@ Config.set('kivy', 'log_level', 'debug')
 import japanize_kivy
 from os.path import dirname, join
 
-from src.Page1 import ImageWidget
-from src.Page2 import CameraClick
-from src.Page3 import CameraPreview, ImageButton
+from src.HomePage import ImageWidget
+from src.CamPage import CameraPreview, ImageButton
 from src.func import show_toast
 
 
@@ -53,5 +52,6 @@ class YakinikuApp(App):
 
 if __name__ == '__main__':                      #main.pyが直接実行されたら、、、という意味らしい
     YakinikuApp().run()                         #
+    
 
 

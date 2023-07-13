@@ -13,11 +13,13 @@ from camera4kivy import Preview
 
 import datetime
 
+# lastpic_path = 'あいうえお'
 
 class CameraPreview(Preview):
     image_texture = ObjectProperty(None)
     image_capture = ObjectProperty(None)
     camera = ObjectProperty(None)
+
 
     def __init__(self, **kwargs):
         super(CameraPreview, self).__init__(**kwargs)
@@ -43,8 +45,20 @@ class CameraPreview(Preview):
         self.capture_photo(subdir=subdir ,name=name)
         pass
     
+    def predict_button(self,subdir1,subdir2):
+        subdir = subdir1 + '/' + subdir2
+        name = 'temp'
+        self.capture_photo(subdir=subdir ,name=name)
+        # global lastpic_path
+        # print(lastpic_path)
+        pass
+        
+
     def show_toast2(self, message):
         show_toast(message)
+        # global lastpic_path
+        # lastpic_path = message
+        return message
 
 
 
