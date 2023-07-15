@@ -26,10 +26,10 @@ source.include_exts = py,png,jpg,kv,atlas,tflite
 
 # (list) List of exclusions using pattern matching
 # Do not prefix with './'
-source.exclude_patterns = object_detection/efficient*.tflite
+# source.exclude_patterns = object_detection/efficient*.tflite
 
 # (str) Application versioning (method 1)
-version = 0.11
+version = 0.20
 
 # (str) Application versioning (method 2)
 # version.regex = __version__ = ['"](.*)['"]
@@ -38,7 +38,7 @@ version = 0.11
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
 # requirements = Python3, kivy==2.2.0, cython, japanize_kivy, plyer, pyjnius, numpy, opencv==4.7.0, torch, torchvision, pytorch_lightning, pillow
-requirements = Python3, kivy==2.2.0, cython, japanize_kivy, plyer, pyjnius, numpy, camera4kivy, gestures4kivy, tflite-runtime
+requirements = Python3, kivy==2.2.0, cython, japanize_kivy, plyer, pyjnius, numpy, camera4kivy, gestures4kivy, tflite-runtime, pillow
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
