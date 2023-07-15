@@ -55,14 +55,9 @@ def predict(image_path):
     
     #　データの前処理
     input_data = preprocess(image_path)
-    print(input_data.shape)
     input_data = tf.transpose(input_data, perm=[0, 3, 1, 2])
-    print(input_data.shape)
-
-    saveimg(input_data)
     
-    # 推論の実行
-    interpreter.set_tensor(interpreter.get_input_details()[0]["index"], input_data)
+    # 推論の実行 interpreter.set_tensor(interpreter.get_input_details()[0]["index"], input_data)
     interpreter.invoke()
     
     # 結果の取得
@@ -73,23 +68,3 @@ def predict(image_path):
     y_pred_proba = round((np.max(tf.nn.softmax(output_data, axis=-1)) * 100), 2)
     
     return predicted_label, y_pred_proba
-
-
-import tensorflow as tf
-import matplotlib.pyplot as plt
-
-def saveimg(input_data):
-    tensor = tf.squeeze(input_data, axis=0)
-    tensor = tf.transpose(tensor, perm=[1, 2, 0])
-    print(tensor)
-
-    # テンソルの値が[0, 1]の範囲に収まるように調整します
-    tensor = tf.clip_by_value(tensor, 0, 1)
-
-    # テンソルを画像データに変換します
-    image = tf.image.convert_image_dtype(tensor, dtype=tf.uint8)
-
-    # Matplotlibを使って画像を保存します
-    plt.imshow(image)
-    plt.axis('off')  # 軸を非表示にします
-    plt.savefig('image.png')
