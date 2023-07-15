@@ -1,7 +1,14 @@
 # 必要なモジュールのインポート
 from PIL import Image
 import numpy as np
-import tensorflow as tf
+
+# pylint: disable=g-import-not-at-top
+try:
+  # Import TFLite interpreter from tflite_runtime package if it's available.
+  from tflite_runtime import tf
+except:
+  # If not, fallback to use the TFLite interpreter from the full TF package.
+  import tensorflow as tf
 
 # 学習済みモデルに合わせた前処理を追加
 def preprocess(image_path):
