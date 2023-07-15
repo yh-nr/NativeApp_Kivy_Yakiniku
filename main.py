@@ -14,7 +14,7 @@ from os.path import dirname, join
 
 from src.HomePage import ImageWidget
 from src.CamPage import CameraPreview, ImageButton
-from src.func import show_toast
+from src.func import show_toast, internal_savefile_location, external_savefile_location
 
 
 # カメラへのアクセス許可を要求する

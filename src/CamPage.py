@@ -8,8 +8,11 @@ from kivy.clock import Clock
 from kivy.uix.behaviors import ButtonBehavior
 from os.path import dirname, join
 
-from .func import SavePic, show_toast
+from .func import SavePic, show_toast, internal_savefile_location, external_savefile_location
+from .predict import predict
 from camera4kivy import Preview
+
+from PIL import Image as PILImage
 
 import datetime
 
@@ -28,10 +31,23 @@ class CameraPreview(Preview):
     def play(self):
         if self.camera_connected == False:
             show_toast('カメラへの接続を試みます')
-            self.connect_camera(enable_analyze_pixels = True, enable_video = False, filepath_callback = show_toast)
+            self.connect_camera(enable_analyze_pixels = True, enable_video = False, filepath_callback = self.show_toast2)
         else:
             show_toast('カメラを切断します')
             self.disconnect_camera()
+
+    def show_toast2(self, message):
+        if message.endswith("temp.jpg"):
+            show_toast('保存した写真で推論を実行するよ！')
+            pred, animalNameProba_ = predict(message)
+            animalName_ = self.getName(pred)
+            show_toast(str(animalName_) + str(animalNameProba_))
+
+        else:
+            show_toast('写真を保存しただけだよ！')
+        # global lastpic_path
+        # lastpic_path = message
+        return message
 
     def capture_button(self,subdir1,subdir2):
         t_delta = datetime.timedelta(hours=9)
@@ -45,22 +61,24 @@ class CameraPreview(Preview):
         self.capture_photo(subdir=subdir ,name=name)
         pass
     
+
     def predict_button(self,subdir1,subdir2):
         subdir = subdir1 + '/' + subdir2
         name = 'temp'
         self.capture_photo(subdir=subdir ,name=name)
-        # global lastpic_path
-        # print(lastpic_path)
-        pass
-        
+        pred, animalNameProba_ = predict('temp.jpg')
+        animalName_ = self.getName(pred)
+        show_toast(str(animalName_) + str(animalNameProba_))
 
-    def show_toast2(self, message):
-        show_toast(message)
-        # global lastpic_path
-        # lastpic_path = message
-        return message
+    #　推論したラベルから犬か猫かを返す関数
+    def getName(self, label):
+        if label==0: return '猫'
+        elif label==1: return '犬'
 
-
+    #　推論したラベルから犬か猫かを返す関数
+    def test_button(self):
+        show_toast(internal_savefile_location())
+        self.capture_photo(location=internal_savefile_location(), subdir='temp', name='temp')
 
 # 撮影ボタン
 class ImageButton(ButtonBehavior, Image):

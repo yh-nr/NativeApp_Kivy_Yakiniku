@@ -1,5 +1,5 @@
 from kivy.utils import platform
-from os.path import dirname, join
+from os.path import dirname, join, abspath
 from plyer import notification
 
 
@@ -59,59 +59,29 @@ def show_toast(message):
             toast=True
         )
 
+#内部の保存フォルダ
+def internal_savefile_location():
+    if platform == 'android':
+        from android.storage import app_storage_path
+        return app_storage_path()
+
+    elif platform == 'win': 
+        return abspath('.')
 
 
+#外部の保存フォルダ
+def external_savefile_location():
+    if platform == 'android':
+        return 'この機能は準備中'
 
-# // Defines a new Uri object that receives the result of the insertion
-# Uri newUri;
- 
-# ...
- 
-# // Defines an object to contain the new values to insert
-# ContentValues newValues = new ContentValues();
- 
-# // Sets the values of each column and inserts the word. 
-# // The arguments to the "put" method are "column name" and "value"
-# newValues.put(UserDictionary.Words.APP_ID, "example.user");
-# newValues.put(UserDictionary.Words.LOCALE, "en_US");
-# newValues.put(UserDictionary.Words.WORD, "insert");
-# newValues.put(UserDictionary.Words.FREQUENCY, "100");
- 
-# newUri = getContentResolver().insert(
-#     UserDictionary.Words.CONTENT_URI,   // the user dictionary content URI
-#     newValues                          // the values to insert
-# );
+    elif platform == 'win': 
+        CSIDL_MYPICTURES = 39           # CSIDL_MYPICTURES の値は 39
+        MAX_PATH = 260                  # 最大パス長
 
+        # SHGetFolderPath 関数を呼び出すためのセットアップ        
+        import ctypes
+        shell32 = ctypes.windll.shell32
+        buf = ctypes.create_unicode_buffer(MAX_PATH)
+        shell32.SHGetFolderPathW(0, CSIDL_MYPICTURES, 0, 0, buf)
 
-
-
-# # 必要なモジュールのインポート
-# from torchvision import transforms
-# import pytorch_lightning as pl
-# import torch.nn as nn
-# #学習時に使ったのと同じ学習済みモデルをインポート
-# from torchvision.models import resnet18 
-
-# # 学習済みモデルに合わせた前処理を追加
-# transform = transforms.Compose([
-#     transforms.Resize(256),
-#     transforms.CenterCrop(224),
-#     transforms.ToTensor(),
-#     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
-# ])
-
-# #　ネットワークの定義
-# class Net(pl.LightningModule):
-
-#     def __init__(self):
-#         super().__init__()
-
-#         #学習時に使ったのと同じ学習済みモデルを定義
-#         self.feature = resnet18(pretrained=True) 
-#         self.fc = nn.Linear(1000, 2)
-
-#     def forward(self, x):
-#         #学習時に使ったのと同じ順伝播
-#         h = self.feature(x)
-#         h = self.fc(h)
-#         return h
+        return buf.value    # パスを取得
