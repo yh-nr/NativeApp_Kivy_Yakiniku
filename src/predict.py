@@ -1,6 +1,7 @@
 # 必要なモジュールのインポート
 from PIL import Image
 import numpy as np
+from .func import show_toast
 
 # pylint: disable=g-import-not-at-top
 try:
@@ -92,10 +93,12 @@ def predict(image_path):
   
   #　データの前処理
   input_data = preprocess(image_path)
+  show_toast('しおり１')
   
   # 推論の実行 
   interpreter.set_tensor(interpreter.get_input_details()[0]["index"], input_data)
   interpreter.invoke()
+  show_toast('しおり２')
   
   # 結果の取得
   output_data = interpreter.get_tensor(interpreter.get_output_details()[0]["index"])
