@@ -40,6 +40,7 @@ class CameraPreview(Preview):
         if message.endswith("temp.jpg"):
             show_toast('保存した写真で推論を実行するよ！')
             pred, animalNameProba_ = predict(message)
+            show_toast('しおり３')
             animalName_ = self.getName(pred)
             show_toast(str(animalName_) + str(animalNameProba_))
 
