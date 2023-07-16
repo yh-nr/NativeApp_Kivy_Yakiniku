@@ -59,7 +59,7 @@ def preprocess(image_path):
   else:
       new_height = 224
       new_width = 224 * image.size[0] // image.size[1]
-  
+
   image = image.resize((new_width, new_height))
 
   # Crop the center 224x224 pixels
@@ -71,7 +71,7 @@ def preprocess(image_path):
 
   # Convert image to numpy array
   img_array = np.array(image)
-  
+
   # Normalize image data to [0, 1] range
   img_normalized = img_array / 255.0
 
@@ -79,12 +79,12 @@ def preprocess(image_path):
   mean = np.array([0.485, 0.456, 0.406])
   std = np.array([0.229, 0.224, 0.225])
   img_normalized = (img_normalized - mean) / std
-  
+
   # Add a new dimension for the batch
   img_expanded = np.expand_dims(img_normalized, axis=0)
   img_expanded = img_expanded.transpose((0, 3, 1, 2))
 
-  return img_expanded
+  return img_expanded.astype(np.float32)
 
 
 # 学習済みモデルをもとに推論する

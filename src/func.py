@@ -1,9 +1,13 @@
+"""func.pyには共通の関数を格納しています。"""
+
+from os.path import join, abspath
+
 from kivy.utils import platform
-from os.path import dirname, join, abspath
 from plyer import notification
 
 
 def SavePic(camera, timestr):
+    """SavePicは"""
     if platform == 'android':
         from jnius import autoclass     
         # AndroidのJavaクラスにアクセス
@@ -46,31 +50,35 @@ def SavePic(camera, timestr):
     filename = f"IMG_{timestr}.png"
     filepath = join(app_storage_path, filename)
     camera.export_to_png(filepath)
-    try:camera.export_to_png(filename)
-    except:pass
+    try:
+        camera.export_to_png(filename)
+    except:
+        pass
 
     return filepath
 
 
 def show_toast(message):
-        notification.notify(
-            message=message,
-            timeout=1,
-            toast=True
-        )
+    """show_toastは、受け取った文字列messageをtoast表示します。"""
+    notification.notify(
+        message=message,
+        timeout=1,
+        toast=True
+    )
 
 #内部の保存フォルダ
 def internal_savefile_location():
+    """内部ディレクトリの絶対パスを返す"""
     if platform == 'android':
         from android.storage import app_storage_path
         return app_storage_path()
 
-    elif platform == 'win': 
+    elif platform == 'win':
         return abspath('.')
 
 
-#外部の保存フォルダ
 def external_savefile_location():
+    """外部ディレクトリの絶対パスを返す"""
     if platform == 'android':
         return 'この機能は準備中'
 
@@ -78,7 +86,7 @@ def external_savefile_location():
         CSIDL_MYPICTURES = 39           # CSIDL_MYPICTURES の値は 39
         MAX_PATH = 260                  # 最大パス長
 
-        # SHGetFolderPath 関数を呼び出すためのセットアップ        
+        # SHGetFolderPath 関数を呼び出すためのセットアップ
         import ctypes
         shell32 = ctypes.windll.shell32
         buf = ctypes.create_unicode_buffer(MAX_PATH)

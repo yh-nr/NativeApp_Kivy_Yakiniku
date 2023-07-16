@@ -1,3 +1,6 @@
+"""CamPage.pyはカメラ機能のページの処理を記述しています。"""
+
+from os.path import dirname, join
 from kivy.uix.image import Image
 from kivy.uix.widget import Widget 
 from kivy.uix.boxlayout import BoxLayout
@@ -6,9 +9,8 @@ from kivy.properties import ObjectProperty
 from kivy.graphics.texture import Texture
 from kivy.clock import Clock
 from kivy.uix.behaviors import ButtonBehavior
-from os.path import dirname, join
 
-from .func import SavePic, show_toast, internal_savefile_location, external_savefile_location
+from .func import show_toast, internal_savefile_location
 from .predict import predict
 from camera4kivy import Preview
 
@@ -43,11 +45,8 @@ class CameraPreview(Preview):
             show_toast('しおり３')
             animalName_ = self.getName(pred)
             show_toast(str(animalName_) + str(animalNameProba_))
-
         else:
             show_toast('写真を保存しただけだよ！')
-        # global lastpic_path
-        # lastpic_path = message
         return message
 
     def capture_button(self,subdir1,subdir2):
@@ -79,7 +78,7 @@ class CameraPreview(Preview):
     #　推論したラベルから犬か猫かを返す関数
     def test_button(self):
         show_toast(internal_savefile_location())
-        self.capture_photo(location=internal_savefile_location(), subdir='temp', name='temp')
+        self.capture_photo(location='private', subdir='temp', name='temp')
 
 # 撮影ボタン
 class ImageButton(ButtonBehavior, Image):
