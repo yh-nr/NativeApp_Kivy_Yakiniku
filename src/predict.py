@@ -47,8 +47,10 @@ except ImportError:
 
 
 def preprocess(image_path):
+  show_toast('しおり0A')
   # Load the image
   image = Image.open(image_path)
+  show_toast('しおり０B')
 
   # Resize the image so that the shortest side is 224 pixels
   if image.size[0] < image.size[1]:
