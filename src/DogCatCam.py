@@ -46,7 +46,7 @@ class CameraPreview2(Preview):
             # show_toast('しおり３')
             animalName_ = self.getName(pred)
             show_toast(str(animalName_) + str(animalNameProba_))
-            self.ids.res_predict.text = str(animalName_) + str(animalNameProba_)
+            self.res_predict_str = str(animalName_) + str(animalNameProba_)
         else:
             show_toast('写真を保存しただけだよ！')
         return message
