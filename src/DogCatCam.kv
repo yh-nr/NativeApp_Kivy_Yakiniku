@@ -1,0 +1,47 @@
+Screen: 
+    name: 'DogCatCamPage'
+    on_enter:camerapreview.connect_camera(enable_analyze_pixels = True, enable_video = False, filepath_callback = camerapreview.show_toast2)
+    on_pre_leave:camerapreview.disconnect_camera()
+
+    CameraWidget:
+        CameraPreview2:
+            id:camerapreview
+            size: root.size
+
+        BoxLayout:
+            orientation: 'vertical'
+            size: root.size
+
+            Label:
+                id:res_predict
+                size: root.size
+                text: '推論結果をここに表示'
+
+            BoxLayout:
+                size_hint_y: 0.2
+                Button:
+                    text: "I/O"
+                    background_color: 1,1,1,0
+                    color: 1,.3,.3,.5
+                    font_size:35
+                    bold:True
+                    on_press:camerapreview.play()
+                Button:
+                    text: "Predict"
+                    background_color: 1,1,1,0
+                    color: 1,.3,.3,.5
+                    font_size:35
+                    bold:True
+                    on_press:camerapreview.test_button()
+
+                Button:
+                    text: "test"
+                    background_color: 1,1,1,0
+                    color: 1,.3,.3,.5
+                    font_size:35
+                    bold:True
+                    on_press:res_predict.text = 'テスト'
+
+<CameraWidget@Widget>:
+            
+

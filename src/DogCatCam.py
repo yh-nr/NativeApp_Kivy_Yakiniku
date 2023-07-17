@@ -20,14 +20,14 @@ import datetime
 
 # lastpic_path = 'あいうえお'
 
-class CameraPreview(Preview):
+class CameraPreview2(Preview):
     image_texture = ObjectProperty(None)
     image_capture = ObjectProperty(None)
     camera = ObjectProperty(None)
 
 
     def __init__(self, **kwargs):
-        super(CameraPreview, self).__init__(**kwargs)
+        super(CameraPreview2, self).__init__(**kwargs)
         pass
  
     def play(self):
@@ -45,7 +45,7 @@ class CameraPreview(Preview):
             # show_toast('しおり３')
             animalName_ = self.getName(pred)
             show_toast(str(animalName_) + str(animalNameProba_))
-            self.res_predict.text = str(animalName_) + str(animalNameProba_)
+            self.ids.res_predict.text = str(animalName_) + str(animalNameProba_)
         else:
             show_toast('写真を保存しただけだよ！')
         return message
@@ -64,12 +64,8 @@ class CameraPreview(Preview):
     
 
     def predict_button(self,subdir1,subdir2):
-        subdir = subdir1 + '/' + subdir2
-        name = 'temp'
-        self.capture_photo(subdir=subdir ,name=name)
-        pred, animalNameProba_ = predict('temp.jpg')
-        animalName_ = self.getName(pred)
-        show_toast(str(animalName_) + str(animalNameProba_))
+        show_toast(internal_savefile_location())
+        self.capture_photo(location='private', subdir='temp', name='temp')
 
     #　推論したラベルから犬か猫かを返す関数
     def getName(self, label):

@@ -33,10 +33,18 @@
                 root.switch2page("HomePage")
 
         Button:
-            text: "カメラ"
+            text: "犬猫ｶﾒﾗ"
             font_size: 30
             on_press:
-                title_label.text = "カメラ"
+                title_label.text = "犬猫分類カメラ"
                 sm.transition = FadeTransition()
-                root.switch2page("CamPage")
+                root.switch2page("DogCatCam")
+
+        Button:
+            text: "アノテーションカメラ"
+            font_size: 30
+            on_press:
+                title_label.text = "アノテーションカメラ"
+                sm.transition = FadeTransition()
+                root.switch2page("Cam2annotate")
 

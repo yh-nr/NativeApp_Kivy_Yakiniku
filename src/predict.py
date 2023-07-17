@@ -47,10 +47,10 @@ except ImportError:
 
 
 def preprocess(image_path):
-  show_toast('しおり0A')
+  # show_toast('しおり0A')
   # Load the image
   image = Image.open(image_path)
-  show_toast('しおり０B')
+  # show_toast('しおり０B')
 
   # Resize the image so that the shortest side is 224 pixels
   if image.size[0] < image.size[1]:
@@ -95,12 +95,12 @@ def predict(image_path):
   
   #　データの前処理
   input_data = preprocess(image_path)
-  show_toast('しおり１')
+  # show_toast('しおり１')
   
   # 推論の実行 
   interpreter.set_tensor(interpreter.get_input_details()[0]["index"], input_data)
   interpreter.invoke()
-  show_toast('しおり２')
+  # show_toast('しおり２')
   
   # 結果の取得
   output_data = interpreter.get_tensor(interpreter.get_output_details()[0]["index"])

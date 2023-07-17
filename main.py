@@ -13,7 +13,8 @@ import japanize_kivy
 from os.path import dirname, join
 
 from src.HomePage import ImageWidget
-from src.CamPage import CameraPreview, ImageButton
+from src.Cam2annotate import CameraPreview
+from src.DogCatCam import CameraPreview2
 from src.func import show_toast, internal_savefile_location, external_savefile_location
 
 
