@@ -24,7 +24,7 @@ class CameraPreview2(Preview):
     image_texture = ObjectProperty(None)
     image_capture = ObjectProperty(None)
     camera = ObjectProperty(None)
-    res_predict_str = ObjectProperty('SPテスト')
+    res_predict_str = StringProperty('SPテスト')
 
 
     def __init__(self, **kwargs):
