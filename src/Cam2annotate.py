@@ -2,15 +2,16 @@
 
 from os.path import dirname, join
 from kivy.uix.image import Image
-from kivy.uix.widget import Widget 
-from kivy.uix.boxlayout import BoxLayout
-from kivy.lang import Builder
-from kivy.properties import ObjectProperty
+from kivy.uix.button import Button
+# from kivy.uix.widget import Widget 
+# from kivy.uix.boxlayout import BoxLayout
+# from kivy.lang import Builder
+from kivy.properties import ObjectProperty, StringProperty
 from kivy.graphics.texture import Texture
 from kivy.clock import Clock
 from kivy.uix.behaviors import ButtonBehavior
 
-from .func import show_toast, internal_savefile_location
+from .func import show_toast, internal_savefile_location, load_setting
 from .predict import predict
 from camera4kivy import Preview
 
@@ -19,6 +20,9 @@ from PIL import Image as PILImage
 import datetime
 
 # lastpic_path = 'あいうえお'
+
+class ATButton(Button):
+    custom_id = StringProperty('')
 
 class CameraPreview(Preview):
     image_texture = ObjectProperty(None)
@@ -29,6 +33,10 @@ class CameraPreview(Preview):
     def __init__(self, **kwargs):
         super(CameraPreview, self).__init__(**kwargs)
         pass
+
+    def get_button_text(self, instance):
+        settings = load_setting()
+        return f"[{settings[instance.custom_id]['num']}]\n{settings[instance.custom_id]['name']}"
  
     def play(self):
         if self.camera_connected == False:
@@ -50,12 +58,16 @@ class CameraPreview(Preview):
             show_toast('写真を保存しただけだよ！')
         return message
 
-    def capture_button(self,subdir1,subdir2):
+    def capture_button(self,instance):
         t_delta = datetime.timedelta(hours=9)
         JST = datetime.timezone(t_delta, 'JST')
         now = datetime.datetime.now(JST)
 
-        #windowsの場合に、subdir1が存在するかチェックするコードをここに入れる       
+        #windowsの場合に、subdir1が存在するかチェックするコードをここに入れる      
+         
+        settings = load_setting()
+        subdir1 = settings['theme']
+        subdir2 = str(settings[instance.custom_id]['num'])
 
         subdir = subdir1 + '/' + subdir2
         name = f'img{now:%y%m%d%H%M%S%f}'[:-3]
@@ -63,23 +75,23 @@ class CameraPreview(Preview):
         pass
     
 
-    def predict_button(self,subdir1,subdir2):
-        subdir = subdir1 + '/' + subdir2
-        name = 'temp'
-        self.capture_photo(subdir=subdir ,name=name)
-        pred, animalNameProba_ = predict('temp.jpg')
-        animalName_ = self.getName(pred)
-        show_toast(str(animalName_) + str(animalNameProba_))
+    # def predict_button(self,subdir1,subdir2):
+    #     subdir = subdir1 + '/' + subdir2
+    #     name = 'temp'
+    #     self.capture_photo(subdir=subdir ,name=name)
+    #     pred, animalNameProba_ = predict('temp.jpg')
+    #     animalName_ = self.getName(pred)
+    #     show_toast(str(animalName_) + str(animalNameProba_))
 
-    #　推論したラベルから犬か猫かを返す関数
-    def getName(self, label):
-        if label==0: return '猫'
-        elif label==1: return '犬'
+    # # #　推論したラベルから犬か猫かを返す関数
+    # # def getName(self, label):
+    # #     if label==0: return '猫'
+    # #     elif label==1: return '犬'
 
-    #　推論したラベルから犬か猫かを返す関数
-    def test_button(self):
-        show_toast(internal_savefile_location())
-        self.capture_photo(location='private', subdir='temp', name='temp')
+    # # #　推論したラベルから犬か猫かを返す関数
+    # # def test_button(self):
+    # #     show_toast(internal_savefile_location())
+    # #     self.capture_photo(location='private', subdir='temp', name='temp')
 
 # 撮影ボタン
 class ImageButton(ButtonBehavior, Image):

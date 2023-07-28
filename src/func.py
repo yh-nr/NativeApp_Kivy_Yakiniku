@@ -1,5 +1,6 @@
 """func.pyには共通の関数を格納しています。"""
 
+import json
 from os.path import join, abspath
 
 from kivy.utils import platform
@@ -93,3 +94,9 @@ def external_savefile_location():
         shell32.SHGetFolderPathW(0, CSIDL_MYPICTURES, 0, 0, buf)
 
         return buf.value    # パスを取得
+    
+def load_setting():
+  filename='.\cambuttons.json'
+  with open(filename, 'r', encoding='utf-8') as f:
+      settings_dict = json.load(f)
+  return settings_dict
