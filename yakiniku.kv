@@ -1,5 +1,4 @@
 #: import FadeTransition kivy.uix.screenmanager.FadeTransition
-#: include src/DefaultPage.kv
 
 <AppFrame>:
     screen_manager: sm
@@ -16,10 +15,8 @@
                 pos: self.pos
                 size: self.size
 
-    ScreenManager:
+    MyScreenManager:
         id: sm
-        DefaultPage:
-            name:'DefaultPage'
 
     BoxLayout:
         size_hint: 1, 0.2

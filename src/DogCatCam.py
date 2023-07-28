@@ -1,14 +1,7 @@
 """CamPage.pyはカメラ機能のページの処理を記述しています。"""
 
 from os.path import dirname, join
-from kivy.uix.image import Image
-from kivy.uix.widget import Widget 
-from kivy.uix.boxlayout import BoxLayout
-from kivy.lang import Builder
 from kivy.properties import ObjectProperty, StringProperty
-from kivy.graphics.texture import Texture
-from kivy.clock import Clock
-from kivy.uix.behaviors import ButtonBehavior
 
 from .func import show_toast, internal_savefile_location
 from .predict import predict
@@ -77,7 +70,3 @@ class CameraPreview2(Preview):
     def test_button(self):
         show_toast(internal_savefile_location())
         self.capture_photo(location='private', subdir='temp', name='temp')
-
-# 撮影ボタン
-class ImageButton(ButtonBehavior, Image):
-    pass

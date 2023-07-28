@@ -3,6 +3,8 @@ from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.lang import Builder
 from kivy.properties import ObjectProperty
+from kivy.uix.screenmanager import ScreenManager
+
 
 from kivy.config import Config
 # Config.set('graphics', 'width', '480')
@@ -30,6 +32,13 @@ except:
     print('ここは毎回実行されてる？？？(permissionのexcept)')
     pass
 
+
+class MyScreenManager(ScreenManager):
+    def __init__(self, **kwargs):
+        super(MyScreenManager, self).__init__(**kwargs)
+        curdir = dirname(__file__)
+        screen = Builder.load_file(join(curdir, f'src/HomePage.kv'))
+        self.switch_to(screen, direction='left')
 
 class AppFrame(BoxLayout):
     screen_manager = ObjectProperty(None)

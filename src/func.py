@@ -96,7 +96,7 @@ def external_savefile_location():
         return buf.value    # パスを取得
     
 def load_setting():
-  filename='.\cambuttons.json'
+  filename='./src/cambuttons.json'
   with open(filename, 'r', encoding='utf-8') as f:
       settings_dict = json.load(f)
   return settings_dict
