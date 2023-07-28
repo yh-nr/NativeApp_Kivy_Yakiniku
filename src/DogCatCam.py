@@ -2,6 +2,7 @@
 
 from os.path import dirname, join
 from kivy.properties import ObjectProperty, StringProperty
+from kivy.uix.image import Image
 
 from .func import show_toast, internal_savefile_location
 from .predict import predict
@@ -70,3 +71,6 @@ class CameraPreview2(Preview):
     def test_button(self):
         show_toast(internal_savefile_location())
         self.capture_photo(location='private', subdir='temp', name='temp')
+
+class PredictResultImage(Image):
+    pass
