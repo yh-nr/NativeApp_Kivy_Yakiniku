@@ -4,22 +4,30 @@ Screen:
     on_enter:camerapreview.play()
     on_pre_leave:camerapreview.disconnect_camera()
 
+
     CameraWidget:
         CameraPreview2:
+            res_predict:res_predict
+            res_predict_img:res_predict_img
             id:camerapreview
             size: root.size
 
         BoxLayout:
             orientation: 'vertical'
             size: root.size
-
-            PredictResultImage:
+            
+            FloatLayout: 
                 id:res_predict
-                size: root.size
-                opacity: 0
                 on_touch_down:
                     self.opacity = 0
-                    self.disabled: 'True'
+                    # self.disabled: 'True'
+                opacity: 0
+                PredictResultImage:
+                    id:res_predict_img
+                    size: root.size
+                Label:
+                    id:res_predict_label
+                    text:camerapreview.res_predict_str
 
             BoxLayout:
                 size_hint_y: 0.2

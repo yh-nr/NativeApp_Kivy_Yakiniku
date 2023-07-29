@@ -104,13 +104,19 @@ def load_setting():
       settings_dict = json.load(f)
   return settings_dict
 
+def load_setting():
+  path = get_data_dir()
+  with open(path, 'r', encoding='utf-8') as f:
+      settings_dict = json.load(f)
+  return settings_dict
+
 def get_data_dir():
     if platform == 'android':
-        # return os.path.join(App.get_running_app().user_data_dir)
-        resource_add_path('.\src')
-        return resource_find('cambuttons.json')
+        return os.path.join(App.get_running_app().user_data_dir)
+        # resource_add_path('.\src')
+        # return resource_find('cambuttons.json')
     elif platform == 'win': 
         # return os.path.dirname(os.path.abspath(__file__))
-        # return os.path.join(os.path.dirname(os.path.abspath(__file__)), 'cambuttons.json')
-        resource_add_path('.\src')
-        return resource_find('cambuttons.json')
+        return os.path.join(os.path.dirname(os.path.abspath(__file__)), 'cambuttons.json')
+        # resource_add_path('.\src')
+        # return resource_find('cambuttons.json')

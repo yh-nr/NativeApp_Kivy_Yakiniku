@@ -20,6 +20,8 @@ class CameraPreview2(Preview):
     image_texture = ObjectProperty(None)
     image_capture = ObjectProperty(None)
     camera = ObjectProperty(None)
+    res_predict = ObjectProperty(None)
+    res_predict_img = ObjectProperty(None)
     res_predict_str = StringProperty('SPテスト')
 
 
@@ -43,7 +45,7 @@ class CameraPreview2(Preview):
             pred, animalNameProba_ = predict(message)
             # show_toast('しおり３')
             animalName_ = self.getName(pred)
-            PredictResultImage.imagedisplay(self, message)
+            self.imagedisplay(message)
             show_toast(str(animalName_) + str(animalNameProba_))
             self.res_predict_str = str(animalName_) + str(animalNameProba_)
         else:
@@ -85,10 +87,18 @@ class CameraPreview2(Preview):
     def test_run(self):
         show_toast(get_data_dir())
 
+        
+    def imagedisplay(self, source='.\\temp\\temp230729111042245.jpg'):
+        pre_res = self.res_predict
+        pre_res_img = self.res_predict_img
+        pre_res.disabled = False
+        pre_res.opacity = 1
+        pre_res_img.source = source
+
 
 class PredictResultImage(Image):
-    def imagedisplay(self, source='.\\temp\\temp230729111042245.jpg'):
-        self.disabled = False
-        self.source = source
-        self.opacity = 1
+    # def imagedisplay(self, source='.\\temp\\temp230729111042245.jpg'):
+    #     self.disabled = False
+    #     self.source = source
+    #     self.opacity = 1
     pass
