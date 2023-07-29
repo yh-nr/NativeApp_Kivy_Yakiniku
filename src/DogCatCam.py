@@ -6,7 +6,7 @@ from kivy.properties import ObjectProperty, StringProperty
 from kivy.uix.image import Image
 from kivy.uix.behaviors import ButtonBehavior
 
-from .func import show_toast, internal_savefile_location
+from .func import show_toast, internal_savefile_location, get_data_dir
 from .predict import predict
 from camera4kivy import Preview
 
@@ -35,13 +35,15 @@ class CameraPreview2(Preview):
             show_toast('カメラを切断します')
             self.disconnect_camera()
 
+    # capture_photoのコールバック関数
     def show_toast2(self, message):
         # if message.endswith("temp*.jpg"):
-        if re.match(r'^temp\d{15}\.jpg$', message):
+        if re.match(r'.*temp\d{15}\.jpg$', message):
             # show_toast('保存した写真で推論を実行するよ！')
             pred, animalNameProba_ = predict(message)
             # show_toast('しおり３')
             animalName_ = self.getName(pred)
+            PredictResultImage.imagedisplay(self, message)
             show_toast(str(animalName_) + str(animalNameProba_))
             self.res_predict_str = str(animalName_) + str(animalNameProba_)
         else:
@@ -79,8 +81,14 @@ class CameraPreview2(Preview):
         # show_toast(internal_savefile_location())
         self.capture_photo(location='private', subdir='temp', name=f'temp{now:%y%m%d%H%M%S%f}'[:-3])
 
+
+    def test_run(self):
+        show_toast(get_data_dir())
+
+
 class PredictResultImage(Image):
-    def imagedisplay(self):
+    def imagedisplay(self, source='.\\temp\\temp230729111042245.jpg'):
         self.disabled = False
-        self.source = 'I:\\Kikagaku\\kikagaku_choki_WebAppPart\\NativeApp_Kivy_Yakiniku\\temp\\temp.jpg'
+        self.source = source
         self.opacity = 1
+    pass

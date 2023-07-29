@@ -5,7 +5,7 @@ import os
 from os.path import join, abspath
 
 from kivy.utils import platform
-from kivy.resources import resource_find
+from kivy.resources import resource_find, resource_add_path
 from kivy.app import App
 from plyer import notification
 
@@ -107,7 +107,10 @@ def load_setting():
 def get_data_dir():
     if platform == 'android':
         # return os.path.join(App.get_running_app().user_data_dir)
+        resource_add_path('.\src')
         return resource_find('cambuttons.json')
     elif platform == 'win': 
         # return os.path.dirname(os.path.abspath(__file__))
-        return os.path.join(os.path.dirname(os.path.abspath(__file__)), 'cambuttons.json')
+        # return os.path.join(os.path.dirname(os.path.abspath(__file__)), 'cambuttons.json')
+        resource_add_path('.\src')
+        return resource_find('cambuttons.json')
