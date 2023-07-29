@@ -5,6 +5,7 @@ import os
 from os.path import join, abspath
 
 from kivy.utils import platform
+from kivy.resources import resource_find
 from kivy.app import App
 from plyer import notification
 
@@ -98,14 +99,15 @@ def external_savefile_location():
         return buf.value    # パスを取得
     
 def load_setting():
-  filename='cambuttons.json'
   path = get_data_dir()
-  with open(os.path.join(path, filename), 'r', encoding='utf-8') as f:
+  with open(path, 'r', encoding='utf-8') as f:
       settings_dict = json.load(f)
   return settings_dict
 
 def get_data_dir():
     if platform == 'android':
-        return os.path.join(App.get_running_app().user_data_dir)
+        # return os.path.join(App.get_running_app().user_data_dir)
+        return resource_find('cambuttons.json')
     elif platform == 'win': 
-        return os.path.dirname(os.path.abspath(__file__))
+        # return os.path.dirname(os.path.abspath(__file__))
+        return os.path.join(os.path.dirname(os.path.abspath(__file__)), 'cambuttons.json')
