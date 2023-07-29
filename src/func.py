@@ -112,9 +112,9 @@ def load_setting():
 
 def get_data_dir():
     if platform == 'android':
-        return os.path.join(App.get_running_app().user_data_dir)
-        # resource_add_path('.\src')
-        # return resource_find('cambuttons.json')
+        # return os.path.join(App.get_running_app().user_data_dir)
+        resource_add_path('.\src')
+        return resource_find('cambuttons.json')
     elif platform == 'win': 
         # return os.path.dirname(os.path.abspath(__file__))
         return os.path.join(os.path.dirname(os.path.abspath(__file__)), 'cambuttons.json')
