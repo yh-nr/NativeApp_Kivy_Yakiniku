@@ -1,8 +1,10 @@
 """CamPage.pyはカメラ機能のページの処理を記述しています。"""
 
 from os.path import dirname, join
+import re
 from kivy.properties import ObjectProperty, StringProperty
 from kivy.uix.image import Image
+from kivy.uix.behaviors import ButtonBehavior
 
 from .func import show_toast, internal_savefile_location
 from .predict import predict
@@ -34,7 +36,8 @@ class CameraPreview2(Preview):
             self.disconnect_camera()
 
     def show_toast2(self, message):
-        if message.endswith("temp.jpg"):
+        # if message.endswith("temp*.jpg"):
+        if re.match(r'^temp\d{15}\.jpg$', message):
             # show_toast('保存した写真で推論を実行するよ！')
             pred, animalNameProba_ = predict(message)
             # show_toast('しおり３')
@@ -69,8 +72,15 @@ class CameraPreview2(Preview):
 
     #　推論したラベルから犬か猫かを返す関数
     def test_button(self):
-        show_toast(internal_savefile_location())
-        self.capture_photo(location='private', subdir='temp', name='temp')
+        t_delta = datetime.timedelta(hours=9)
+        JST = datetime.timezone(t_delta, 'JST')
+        now = datetime.datetime.now(JST)
+
+        # show_toast(internal_savefile_location())
+        self.capture_photo(location='private', subdir='temp', name=f'temp{now:%y%m%d%H%M%S%f}'[:-3])
 
 class PredictResultImage(Image):
-    pass
+    def imagedisplay(self):
+        self.disabled = False
+        self.source = 'I:\\Kikagaku\\kikagaku_choki_WebAppPart\\NativeApp_Kivy_Yakiniku\\temp\\temp.jpg'
+        self.opacity = 1
