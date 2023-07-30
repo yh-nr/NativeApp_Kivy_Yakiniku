@@ -83,7 +83,7 @@ class CameraPreview2(Preview):
         pre_res = self.res_predict
         self.res_predict_img = source
         # pre_res.disabled = False
-        pre_res.opacity = 1
+        # pre_res.opacity = 1
         # Clock.schedule_once(self.update_gui)
  
 
