@@ -8,7 +8,6 @@ Screen:
     CameraWidget:
         CameraPreview2:
             res_predict:res_predict
-            res_predict_img:res_predict_img
             id:camerapreview
             size: root.size
 
@@ -25,6 +24,7 @@ Screen:
                 PredictResultImage:
                     id:res_predict_img
                     size: root.size
+                    source: camerapreview.res_predict_img
                 Label:
                     id:res_predict_label
                     text:camerapreview.res_predict_str
@@ -44,7 +44,7 @@ Screen:
                     color: 1,.3,.3,.5
                     font_size:35
                     bold:True
-                    on_press:camerapreview.test_button()
+                    on_press:camerapreview.predict_button()
                 Button:
                     text: "test"
                     background_color: 1,1,1,0

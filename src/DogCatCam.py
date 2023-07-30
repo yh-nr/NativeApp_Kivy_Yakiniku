@@ -11,6 +11,7 @@ from .predict import predict
 from camera4kivy import Preview
 
 from PIL import Image as PILImage
+from kivy.clock import Clock
 
 import datetime
 
@@ -21,7 +22,7 @@ class CameraPreview2(Preview):
     image_capture = ObjectProperty(None)
     camera = ObjectProperty(None)
     res_predict = ObjectProperty(None)
-    res_predict_img = ObjectProperty(None)
+    res_predict_img = StringProperty('.\\temp\\temp230729164946678.jpg')
     res_predict_str = StringProperty('SPテスト')
 
 
@@ -65,36 +66,26 @@ class CameraPreview2(Preview):
         pass
     
 
-    def predict_button(self,subdir1,subdir2):
-        show_toast(internal_savefile_location())
-        self.capture_photo(location='private', subdir='temp', name='temp')
+    def predict_button(self):
+        t_delta = datetime.timedelta(hours=9)
+        JST = datetime.timezone(t_delta, 'JST')
+        now = datetime.datetime.now(JST)
+
+        self.capture_photo(location='private', subdir='temp', name=f'temp{now:%y%m%d%H%M%S%f}'[:-3])
 
     #　推論したラベルから犬か猫かを返す関数
     def getName(self, label):
         if label==0: return '猫'
         elif label==1: return '犬'
 
-    #　推論したラベルから犬か猫かを返す関数
-    def test_button(self):
-        t_delta = datetime.timedelta(hours=9)
-        JST = datetime.timezone(t_delta, 'JST')
-        now = datetime.datetime.now(JST)
-
-        # show_toast(internal_savefile_location())
-        self.capture_photo(location='private', subdir='temp', name=f'temp{now:%y%m%d%H%M%S%f}'[:-3])
-
-
-    def test_run(self):
-        show_toast(get_data_dir())
-
         
-    def imagedisplay(self, source='.\\temp\\temp230729111042245.jpg'):
+    def imagedisplay(self, source='.\\temp\\temp230729111042246.jpg'):
         pre_res = self.res_predict
-        pre_res_img = self.res_predict_img
+        self.res_predict_img = source
         pre_res.disabled = False
         pre_res.opacity = 1
-        pre_res_img.source = source
-
+        # Clock.schedule_once(self.update_gui)
+ 
 
 class PredictResultImage(Image):
     # def imagedisplay(self, source='.\\temp\\temp230729111042245.jpg'):
