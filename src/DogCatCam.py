@@ -82,7 +82,7 @@ class CameraPreview2(Preview):
     def imagedisplay(self, source='.\\temp\\temp230729111042246.jpg'):
         pre_res = self.res_predict
         self.res_predict_img = source
-        pre_res.disabled = False
+        # pre_res.disabled = False
         pre_res.opacity = 1
         # Clock.schedule_once(self.update_gui)
  
