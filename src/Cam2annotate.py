@@ -74,26 +74,3 @@ class CameraPreview(Preview):
         name = f'img{now:%y%m%d%H%M%S%f}'[:-3]
         self.capture_photo(subdir=subdir ,name=name)
         pass
-    
-
-    # def predict_button(self,subdir1,subdir2):
-    #     subdir = subdir1 + '/' + subdir2
-    #     name = 'temp'
-    #     self.capture_photo(subdir=subdir ,name=name)
-    #     pred, animalNameProba_ = predict('temp.jpg')
-    #     animalName_ = self.getName(pred)
-    #     show_toast(str(animalName_) + str(animalNameProba_))
-
-    # # #　推論したラベルから犬か猫かを返す関数
-    # # def getName(self, label):
-    # #     if label==0: return '猫'
-    # #     elif label==1: return '犬'
-
-    # # #　推論したラベルから犬か猫かを返す関数
-    # # def test_button(self):
-    # #     show_toast(internal_savefile_location())
-    # #     self.capture_photo(location='private', subdir='temp', name='temp')
-
-# 撮影ボタン
-class ImageButton(ButtonBehavior, Image):
-    pass
