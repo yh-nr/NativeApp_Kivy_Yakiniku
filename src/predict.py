@@ -25,8 +25,9 @@ def preprocess(image_path):
     bytes_io = BytesIO()
     with FileInputStream(image_path) as f:
       buf = f.read()
-      print(type(buf))
-      print(type(bytes[buf]))
+      # print(type(buf))
+      # print(type(bytes[buf]))
+      # show_toast(len(buf))
       bytes_io.write(bytes[buf])
     bytes_io.seek(0)
     image = Image.open(bytes_io)
