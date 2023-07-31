@@ -27,10 +27,11 @@ def preprocess(image_path):
 
     with FileInputStream(image_path) as f:
       while True:
-        buf = f.read()
-        if buf == -1:
-            break
+        buf = f.read(1024)  # 一度に最大1024バイト読み込む（適宜変更可）
+        if not buf:  # バイト列が空ならループを終了
+          break
         bytes_io.write(buf)
+
     bytes_io.seek(0)
     image = Image.open(bytes_io)
 
