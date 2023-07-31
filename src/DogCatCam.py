@@ -39,10 +39,8 @@ class CameraPreview2(Preview):
     # このページの機能は推論だけになったので、if分岐は要らないかも
     def show_toast2(self, message):
         if re.match(r'.*temp\d{15}\.jpg$', message):
-
-            pred, animalNameProba_, image = predict(message)
-            # show_toast('しおり３')
-            self.imagedisplay(message)
+            pred, animalNameProba_, texture = predict(message)
+            self.imagedisplay(texture)
             show_toast(str(pred) + str(animalNameProba_))
             self.res_predict_str = str(pred) + str(animalNameProba_)
         else:
@@ -59,13 +57,8 @@ class CameraPreview2(Preview):
 
 
         
-    def imagedisplay(self, source):
+    def imagedisplay(self, texture):
         pre_res = self.res_predict
         pre_res_img = self.res_predict_img
-
-        try:
-            FileInputStream = autoclass('java.io.FileInputStream')
-            pre_res_img.source = FileInputStream(source)
-        except:
-            pre_res_img.source = source
+        pre_res_img.texture = texture
         pre_res.opacity = 1

@@ -11,6 +11,7 @@ except ImportError:
   import tensorflow as tf
   Interpreter = tf.lite.Interpreter
 
+from kivy.graphics.texture import Texture
 from kivy.utils import platform
 try: from jnius import autoclass
 except:pass
@@ -23,14 +24,16 @@ def preprocess(image_path):
   if platform == 'android':
     FileInputStream = autoclass('java.io.FileInputStream')
     bytes_io = BytesIO()
+
     with FileInputStream(image_path) as f:
-      buf = f.read()
-      # print(type(buf))
-      # print(type(bytes[buf]))
-      # show_toast(len(buf))
-      bytes_io.write(bytes[buf])
+      while True:
+        buf = f.read()
+        if buf == -1:
+            break
+        bytes_io.write(buf)
     bytes_io.seek(0)
     image = Image.open(bytes_io)
+
   elif platform == 'win': 
     image = Image.open(image_path)
 
@@ -65,8 +68,13 @@ def preprocess(image_path):
   # Add a new dimension for the batch
   img_expanded = np.expand_dims(img_normalized, axis=0)
   img_expanded = img_expanded.transpose((0, 3, 1, 2))
+  
+  
+  texture = Texture.create(size=(224,224), colorfmt='rgb', bufferfmt='ubyte')
+  texture.blit_buffer(image.tobytes(), colorfmt='rgb', bufferfmt='ubyte')
+  texture.flip_vertical()
 
-  return img_expanded.astype(np.float32), image
+  return img_expanded.astype(np.float32), texture
 
 
 # 学習済みモデルをもとに推論する
@@ -76,8 +84,7 @@ def predict(image_path):
   interpreter.allocate_tensors()
   
   #　データの前処理
-  input_data, image = preprocess(image_path)
-  # show_toast('しおり１')
+  input_data, texture = preprocess(image_path)
   
   # 推論の実行 
   interpreter.set_tensor(interpreter.get_input_details()[0]["index"], input_data)
@@ -97,7 +104,7 @@ def predict(image_path):
   # Convert to percentage
   y_pred_proba_max = round((np.max(y_pred_proba) * 100), 2)
   
-  return getName(predicted_label), y_pred_proba_max, image
+  return getName(predicted_label), y_pred_proba_max, texture
 
 
 #　推論したラベルから犬か猫かを返す関数
