@@ -27,7 +27,7 @@ def preprocess(image_path):
 
     with FileInputStream(image_path) as f:
       while True:
-        buf = f.read() 
+        buf = f.read().to_bytes
         if not buf:  # バイト列が空ならループを終了
           break
         bytes_io.write(buf)
