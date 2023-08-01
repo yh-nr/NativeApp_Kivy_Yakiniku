@@ -1,5 +1,5 @@
 # 必要なモジュールのインポート
-from io import BytesIO
+from io import BytesIO, SEEK_END
 from PIL import Image
 import numpy as np
 from .func import show_toast
@@ -15,28 +15,59 @@ from kivy.graphics.texture import Texture
 from kivy.utils import platform
 try: from jnius import autoclass
 except:pass
-
-
+from PIL import ImageFile
+ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 
 def preprocess(image_path):
   
-  if platform == 'android':
-    FileInputStream = autoclass('java.io.FileInputStream')
-    bytes_io = BytesIO()
+  FileInputStream = autoclass('java.io.FileInputStream')
+  BufferedInputStream = autoclass('java.io.BufferedInputStream')
+  bytes_io = BytesIO()
 
-    with FileInputStream(image_path) as f:
-      while True:
-        buf = f.read().to_bytes(2,"big")
-        if not buf:  # バイト列が空ならループを終了
-          break
-        bytes_io.write(buf)
+  fis = FileInputStream(image_path)
+  buffer_int = 0
+  buf = bytes(1024)
 
-    bytes_io.seek(0)
-    image = Image.open(bytes_io)
+  with BufferedInputStream(fis) as f:
+    while True:
+      buffer_int = f.read(buf)
+      
+      if buffer_int == -1:  # バイト列が空ならループを終了
+        break
+      print(buffer_int)
+      bytes_io.write(buf)
 
-  elif platform == 'win': 
-    image = Image.open(image_path)
+  current_position = bytes_io.tell()
+  bytes_io.seek(0, SEEK_END)
+  size = bytes_io.tell()
+  bytes_io.seek(current_position)
+  print('Size of BytesIO object:', size)  # 出力: Size of BytesIO object: 17
+
+  bytes_io.seek(0)
+  bytesIMG = bytes_io
+  print(type(bytesIMG))
+  null_indices = [i for i, b in enumerate(bytesIMG) if b == 0]
+  print(null_indices)
+  help(Image.open)
+  image = Image.open(bytesIMG, formats=['JPEG'])
+  
+  # if platform == 'android':
+  #   FileInputStream = autoclass('java.io.FileInputStream')
+  #   bytes_io = BytesIO()
+
+  #   with FileInputStream(image_path) as f:
+  #     while True:
+  #       buf = f.read().to_bytes(2,"big")
+  #       if not buf:  # バイト列が空ならループを終了
+  #         break
+  #       bytes_io.write(buf)
+
+  #   bytes_io.seek(0)
+  #   image = Image.open(bytes_io)
+
+  # elif platform == 'win': 
+  #   image = Image.open(image_path)
 
   # Resize the image so that the shortest side is 224 pixels
   if image.size[0] < image.size[1]:
