@@ -100,12 +100,7 @@ def external_savefile_location():
     
 def load_setting():
   path = get_data_dir()
-  with open(path, 'r', encoding='utf-8') as f:
-      settings_dict = json.load(f)
-  return settings_dict
-
-def load_setting():
-  path = get_data_dir()
+  show_toast(path)
   with open(path, 'r', encoding='utf-8') as f:
       settings_dict = json.load(f)
   return settings_dict
