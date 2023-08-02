@@ -20,37 +20,7 @@ ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 
 def preprocess(image_path):
-  
-  FileInputStream = autoclass('java.io.FileInputStream')
-  BufferedInputStream = autoclass('java.io.BufferedInputStream')
-  bytes_io = BytesIO()
-
-  fis = FileInputStream(image_path)
-  buffer_int = 0
-  buf = bytes(1024)
-
-  with BufferedInputStream(fis) as f:
-    while True:
-      buffer_int = f.read(buf)
-      
-      if buffer_int == -1:  # バイト列が空ならループを終了
-        break
-      print(buffer_int)
-      bytes_io.write(buf)
-
-  current_position = bytes_io.tell()
-  bytes_io.seek(0, SEEK_END)
-  size = bytes_io.tell()
-  bytes_io.seek(current_position)
-  print('Size of BytesIO object:', size)  # 出力: Size of BytesIO object: 17
-
-  bytes_io.seek(0)
-  bytesIMG = bytes_io
-  print(type(bytesIMG))
-  null_indices = [i for i, b in enumerate(bytesIMG) if b == 0]
-  print(null_indices)
-  help(Image.open)
-  image = Image.open(bytesIMG, formats=['JPEG'])
+  image = Image.open(image_path)
   
   # if platform == 'android':
   #   FileInputStream = autoclass('java.io.FileInputStream')
