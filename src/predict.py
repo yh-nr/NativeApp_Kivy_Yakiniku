@@ -18,26 +18,30 @@ except:pass
 from PIL import ImageFile
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
-
 def preprocess(image_path):
-  image = Image.open(image_path)
+  File = autoclass('java.io.File')
+  FileInputStream = autoclass('java.io.FileInputStream')
+  BufferedInputStream = autoclass('java.io.BufferedInputStream')
+  ByteArrayOutputStream = autoclass('java.io.ByteArrayOutputStream')
+
+  imageFile = File(image_path)
+  fis = FileInputStream(imageFile)
+  bis = BufferedInputStream(fis)
+  out = ByteArrayOutputStream()
   
-  # if platform == 'android':
-  #   FileInputStream = autoclass('java.io.FileInputStream')
-  #   bytes_io = BytesIO()
+  buf = bytearray(2048)
+  n = bis.read(buf)
+  while n != -1:
+    out.write(buf,0,n)
+    n = bis.read(buf)
 
-  #   with FileInputStream(image_path) as f:
-  #     while True:
-  #       buf = f.read().to_bytes(2,"big")
-  #       if not buf:  # バイト列が空ならループを終了
-  #         break
-  #       bytes_io.write(buf)
+  result = out.toByteArray()
+  bis.close()
+  fis.close()
 
-  #   bytes_io.seek(0)
-  #   image = Image.open(bytes_io)
+  python_bytearray = bytearray([(b + 256) % 256 for b in [result[i] for i in range(len(result))]])
+  image = Image.open(BytesIO(python_bytearray))
 
-  # elif platform == 'win': 
-  #   image = Image.open(image_path)
 
   # Resize the image so that the shortest side is 224 pixels
   if image.size[0] < image.size[1]:
