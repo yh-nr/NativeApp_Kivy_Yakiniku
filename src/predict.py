@@ -19,6 +19,7 @@ from PIL import ImageFile
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 def preprocess(image_path):
+  show_toast('autoclass実行前')
   File = autoclass('java.io.File')
   FileInputStream = autoclass('java.io.FileInputStream')
   BufferedInputStream = autoclass('java.io.BufferedInputStream')
@@ -34,13 +35,15 @@ def preprocess(image_path):
   while n != -1:
     out.write(buf,0,n)
     n = bis.read(buf)
-
+  show_toast('バイト配列出力前')
   result = out.toByteArray()
   bis.close()
   fis.close()
-
+  show_toast('バイト配列変換前')
   python_bytearray = bytearray([(b + 256) % 256 for b in [result[i] for i in range(len(result))]])
+  show_toast('imageopen前')
   image = Image.open(BytesIO(python_bytearray))
+  show_toast('imageopen後')
 
 
   # Resize the image so that the shortest side is 224 pixels
