@@ -24,12 +24,12 @@ def preprocess(image_path):
   FileInputStream = autoclass('java.io.FileInputStream')
   BufferedInputStream = autoclass('java.io.BufferedInputStream')
   ByteArrayOutputStream = autoclass('java.io.ByteArrayOutputStream')
-
+  show_toast('autoclass実行後')
   imageFile = File(image_path)
   fis = FileInputStream(imageFile)
   bis = BufferedInputStream(fis)
   out = ByteArrayOutputStream()
-  
+  show_toast('インスタンス化後')
   buf = bytearray(2048)
   n = bis.read(buf)
   while n != -1:
