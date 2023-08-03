@@ -98,7 +98,6 @@ def predict(image_path):
   # 推論の実行 
   interpreter.set_tensor(interpreter.get_input_details()[0]["index"], input_data)
   interpreter.invoke()
-  show_toast('推論後')
   
   # 結果の取得
   output_data = interpreter.get_tensor(interpreter.get_output_details()[0]["index"])

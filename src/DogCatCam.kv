@@ -18,10 +18,10 @@ Screen:
             
             FloatLayout: 
                 id:res_predict
-                on_touch_down:
-                    self.opacity = 0
+                # on_touch_down:
+                    # self.opacity = 0
                     # self.disabled: 'True'
-                opacity: 0
+                # opacity: 0
                 Image:
                     id:res_predict_img
                     size: root.size
@@ -44,4 +44,5 @@ Screen:
                     color: 1,.3,.3,.5
                     font_size:35
                     bold:True
-                    on_press:camerapreview.predict_button()
+                    on_press:
+                        camerapreview.predict_button()

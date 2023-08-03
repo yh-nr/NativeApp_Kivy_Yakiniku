@@ -5,7 +5,6 @@ from kivy.lang import Builder
 from kivy.properties import ObjectProperty
 from kivy.uix.screenmanager import ScreenManager
 
-
 from kivy.config import Config
 # Config.set('graphics', 'width', '480')
 # Config.set('graphics', 'height', '960')

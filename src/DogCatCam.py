@@ -4,15 +4,13 @@ import re, datetime
 
 from kivy.properties import ObjectProperty, StringProperty
 from kivy.utils import platform
+from kivy.clock import Clock
 from camera4kivy import Preview
 try: from jnius import autoclass
 except:pass
 
 from .func import show_toast
 from .predict import predict
-
-
-
 
 class CameraPreview2(Preview):
     image_texture = ObjectProperty(None)
@@ -61,4 +59,4 @@ class CameraPreview2(Preview):
         pre_res = self.res_predict
         pre_res_img = self.res_predict_img
         pre_res_img.texture = texture
-        pre_res.opacity = 1
+        # pre_res.opacity = 1
