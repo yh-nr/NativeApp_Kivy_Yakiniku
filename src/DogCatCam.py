@@ -28,7 +28,7 @@ class CameraPreview2(Preview):
     def play(self):
         if self.camera_connected == False:
             # show_toast('カメラへの接続を試みます')
-            self.connect_camera(enable_analyze_pixels = True, enable_video = False, filepath_callback = self.show_toast2)
+            self.connect_camera(enable_analyze_pixels = True, enable_video = False, sensor_resolution = (640, 640), filepath_callback = self.show_toast2)
         else:
             # show_toast('カメラを切断します')
             self.disconnect_camera()
