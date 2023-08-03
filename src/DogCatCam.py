@@ -54,9 +54,16 @@ class CameraPreview2(Preview):
         self.capture_photo(location='private', subdir='temp', name=f'temp{now:%y%m%d%H%M%S%f}'[:-3])
 
 
+    def predict_button2(self):
+        t_delta = datetime.timedelta(hours=9)
+        JST = datetime.timezone(t_delta, 'JST')
+        now = datetime.datetime.now(JST)
+
+        self.capture_screenshot(location='private', subdir='temp', name=f'temp{now:%y%m%d%H%M%S%f}'[:-3])
+
         
     def imagedisplay(self, texture):
         pre_res = self.res_predict
         pre_res_img = self.res_predict_img
         pre_res_img.texture = texture
-        # pre_res.opacity = 1
+        pre_res.opacity = 1

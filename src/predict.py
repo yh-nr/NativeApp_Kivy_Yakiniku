@@ -78,7 +78,7 @@ def preprocess(image_path):
   img_expanded = np.expand_dims(img_normalized, axis=0)
   img_expanded = img_expanded.transpose((0, 3, 1, 2))
   
-  
+  show_toast(image.mode)
   texture = Texture.create(size=(224,224), colorfmt='rgb', bufferfmt='ubyte')
   texture.blit_buffer(image.tobytes(), colorfmt='rgb', bufferfmt='ubyte')
   texture.flip_vertical()
