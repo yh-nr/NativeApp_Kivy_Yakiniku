@@ -29,7 +29,7 @@ def preprocess(image_path):
   fis = FileInputStream(imageFile)
   bis = BufferedInputStream(fis)
   out = ByteArrayOutputStream()
-  show_toast('インスタンス化後')
+  # show_toast('インスタンス化後')
   buf = bytearray(2048)
   n = bis.read(buf)
   while n != -1:
@@ -41,7 +41,7 @@ def preprocess(image_path):
   fis.close()
   # show_toast('バイト配列変換前')
   python_bytearray = bytearray([(b + 256) % 256 for b in [result[i] for i in range(len(result))]])
-  # show_toast('imageopen前')
+  # show_toast(f'len(result)')
   image = Image.open(BytesIO(python_bytearray))
   # show_toast('imageopen後')
 
