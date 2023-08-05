@@ -9,6 +9,9 @@ from kivy.resources import resource_find, resource_add_path
 from kivy.app import App
 from plyer import notification
 
+try: from jnius import autoclass
+except:pass
+
 
 def SavePic(camera, timestr):
     """SavePicは"""
@@ -99,19 +102,23 @@ def external_savefile_location():
         return buf.value    # パスを取得
     
 def load_setting():
-  path = get_data_dir()
-  show_toast(path)
-  with open(path, 'r', encoding='utf-8') as f:
-      settings_dict = json.load(f)
-  return settings_dict
-
-def get_data_dir():
     if platform == 'android':
-        # return os.path.join(App.get_running_app().user_data_dir)
-        resource_add_path('.\src')
-        return resource_find('cambuttons.json')
+        path = get_data_dir_android()
     elif platform == 'win': 
-        # return os.path.dirname(os.path.abspath(__file__))
-        return os.path.join(os.path.dirname(os.path.abspath(__file__)), 'cambuttons.json')
-        # resource_add_path('.\src')
-        # return resource_find('cambuttons.json')
+        path = get_data_dir_win()
+
+    show_toast(path)
+    with open(path, 'r', encoding='utf-8') as f:
+        settings_dict = json.load(f)
+    return settings_dict
+
+def get_data_dir_win():
+    return os.path.join(os.path.dirname(os.path.abspath(__file__)), r'..\asset\cambuttons.json')
+
+def get_data_dir_android():
+    
+    AssetManager = autoclass('android.content.res.AssetManager')
+    BufferedReader = autoclass('java.io.BufferedReader')
+    InputStream = autoclass('java.io.InputStream')
+    InputStreamReader = autoclass('java.io.InputStreamReader')
+    return os.path.join(os.path.dirname(os.path.abspath(__file__)), r'..\asset\cambuttons.json')

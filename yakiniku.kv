@@ -45,3 +45,11 @@
                 sm.transition = FadeTransition()
                 root.switch2page("Cam2annotate")
 
+        Button:
+            text: "アノテーション\nカメラ2"
+            font_size: 30
+            on_press:
+                title_label.text = "アノテーション\nカメラ"
+                sm.transition = FadeTransition()
+                root.switch2page("Cam2annotate2")
+
