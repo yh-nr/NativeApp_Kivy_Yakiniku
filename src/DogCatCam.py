@@ -51,8 +51,8 @@ class CameraPreview2(Preview):
         JST = datetime.timezone(t_delta, 'JST')
         now = datetime.datetime.now(JST)
 
-        # self.capture_photo(location='private', subdir='temp', name=f'temp{now:%y%m%d%H%M%S%f}'[:-3])
-        self.capture_photo(subdir='temp', name=f'temp{now:%y%m%d%H%M%S%f}'[:-3])
+        self.capture_photo(location='private', subdir='temp', name=f'temp{now:%y%m%d%H%M%S%f}'[:-3])
+        # self.capture_photo(subdir='temp', name=f'temp{now:%y%m%d%H%M%S%f}'[:-3])
 
 
     def predict_button2(self):
@@ -60,8 +60,8 @@ class CameraPreview2(Preview):
         JST = datetime.timezone(t_delta, 'JST')
         now = datetime.datetime.now(JST)
 
-        # self.capture_screenshot(location='private', subdir='temp', name=f'temp{now:%y%m%d%H%M%S%f}'[:-3])
-        self.capture_screenshot(subdir='temp', name=f'temp{now:%y%m%d%H%M%S%f}'[:-3])
+        self.capture_screenshot(location='private', subdir='temp', name=f'temp{now:%y%m%d%H%M%S%f}'[:-3])
+        # self.capture_screenshot(subdir='temp', name=f'temp{now:%y%m%d%H%M%S%f}'[:-3])
 
         
     def imagedisplay(self, texture):

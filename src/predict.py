@@ -78,9 +78,14 @@ def preprocess(image_path):
   img_expanded = np.expand_dims(img_normalized, axis=0)
   img_expanded = img_expanded.transpose((0, 3, 1, 2))
   
-  show_toast(image.mode)
   texture = Texture.create(size=(224,224), colorfmt='rgb', bufferfmt='ubyte')
-  texture.blit_buffer(image.tobytes(), colorfmt='rgb', bufferfmt='ubyte')
+  data = image.getdata()
+  mode = image.mode
+  size = image.size
+  image_without_exif = Image.new(mode, size)
+  image_without_exif.putdata(data)
+
+  texture.blit_buffer(image_without_exif.tobytes(), colorfmt='rgb', bufferfmt='ubyte')
   texture.flip_vertical()
 
   return img_expanded.astype(np.float32), texture
