@@ -102,22 +102,8 @@ def external_savefile_location():
         return buf.value    # パスを取得
     
 def load_setting():
-        return get_settings_dict()
-    # if platform == 'android':
-    #     return get_settings_dict_android()
-    # elif platform == 'win': 
-    #     return get_settings_dict_win()
-
-def get_settings_dict():
     path = r'./assets/cambuttons.json'
-    show_toast(path)
+    # show_toast(path)
     with open(path, 'r', encoding='utf-8') as f:
         settings_dict = json.load(f)
-    return settings_dict
-
-def get_settings_dict_android():
-    AssetManager = autoclass('android.content.res.AssetManager')
-    BufferedReader = autoclass('java.io.BufferedReader')
-    InputStream = autoclass('java.io.InputStream')
-    InputStreamReader = autoclass('java.io.InputStreamReader')
     return settings_dict

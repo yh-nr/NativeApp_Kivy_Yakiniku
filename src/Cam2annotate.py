@@ -12,7 +12,7 @@ from kivy.clock import Clock
 from kivy.uix.behaviors import ButtonBehavior
 
 
-from .func import show_toast, internal_savefile_location, load_setting
+from .func import show_toast, load_setting
 from .predict import predict
 from camera4kivy import Preview
 
