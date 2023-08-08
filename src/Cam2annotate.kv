@@ -1,6 +1,6 @@
 Screen: 
     name: 'Cam2annotate'
-    on_enter:camerapreview.connect_camera(enable_analyze_pixels = True, enable_video = False, filepath_callback = camerapreview.show_toast2)
+    on_enter:camerapreview.play()
     on_pre_leave:camerapreview.disconnect_camera()
 
     CameraWidget:
@@ -158,6 +158,30 @@ Screen:
                     font_size:35
                     bold:True
                     on_press:camerapreview.play()
+                    
+                Button:
+                    text: "save"
+                    background_color: 1,1,1,0
+                    color: 1,.3,.3,.5
+                    font_size:35
+                    bold:True
+                    on_press:camerapreview.save_button()
+                    
+                Button:
+                    text: "update"
+                    background_color: 1,1,1,0
+                    color: 1,.3,.3,.5
+                    font_size:35
+                    bold:True
+                    on_press:camerapreview.update_button()
+                    
+                Button:
+                    text: "load"
+                    background_color: 1,1,1,0
+                    color: 1,.3,.3,.5
+                    font_size:35
+                    bold:True
+                    on_press:camerapreview.load_button()
 
 <CameraWidget@Widget>:
             

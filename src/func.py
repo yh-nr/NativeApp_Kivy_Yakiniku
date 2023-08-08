@@ -100,10 +100,3 @@ def external_savefile_location():
         shell32.SHGetFolderPathW(0, CSIDL_MYPICTURES, 0, 0, buf)
 
         return buf.value    # パスを取得
-    
-def load_setting():
-    path = r'./assets/cambuttons.json'
-    # show_toast(path)
-    with open(path, 'r', encoding='utf-8') as f:
-        settings_dict = json.load(f)
-    return settings_dict

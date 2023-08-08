@@ -12,7 +12,8 @@ from kivy.clock import Clock
 from kivy.uix.behaviors import ButtonBehavior
 
 
-from .func import show_toast, load_setting
+from .func import show_toast
+from src import config_manager
 from .predict import predict
 from camera4kivy import Preview
 
@@ -30,34 +31,21 @@ class CameraPreview(Preview):
     image_capture = ObjectProperty(None)
     camera = ObjectProperty(None)
 
-
     def __init__(self, **kwargs):
         super(CameraPreview, self).__init__(**kwargs)
         pass
 
     def get_button_text(self, instance):
-        settings = load_setting()
+        settings = config_manager.settings
         return f"[{settings[instance.custom_id]['num']}]\n{settings[instance.custom_id]['name']}"
  
     def play(self):
         if self.camera_connected == False:
-            show_toast('カメラへの接続を試みます')
-            self.connect_camera(enable_analyze_pixels = True, enable_video = False, filepath_callback = self.show_toast2)
+            # show_toast('カメラへの接続を試みます')
+            self.connect_camera(enable_analyze_pixels = True, enable_video = False)
         else:
-            show_toast('カメラを切断します')
+            # show_toast('カメラを切断します')
             self.disconnect_camera()
-
-    def show_toast2(self, message):
-        if message.endswith("temp.jpg"):
-            # show_toast('保存した写真で推論を実行するよ！')
-            pred, animalNameProba_ = predict(message)
-            # show_toast('しおり３')
-            animalName_ = self.getName(pred)
-            show_toast(str(animalName_) + str(animalNameProba_))
-            self.res_predict.text = str(animalName_) + str(animalNameProba_)
-        else:
-            show_toast('写真を保存しただけだよ！')
-        return message
 
     def capture_button(self,instance):
         t_delta = datetime.timedelta(hours=9)
@@ -66,7 +54,7 @@ class CameraPreview(Preview):
 
         #windowsの場合に、subdir1が存在するかチェックするコードをここに入れる      
          
-        settings = load_setting()
+        settings = config_manager.settings
         subdir1 = settings['theme']
         subdir2 = str(settings[instance.custom_id]['num'])
 
@@ -74,3 +62,13 @@ class CameraPreview(Preview):
         name = f'img{now:%y%m%d%H%M%S%f}'[:-3]
         self.capture_photo(subdir=subdir ,name=name)
         pass
+
+    def save_button(self):
+        settings = config_manager.settings
+        config_manager.save_config_to_file('savetest.json', settings)
+
+    def update_button(self):
+        config_manager.update_setting('btn4', 12, 'おけまる')
+
+    def load_button(self):
+        config_manager.load_config_from_file('savetest.json')
