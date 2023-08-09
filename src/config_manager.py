@@ -11,8 +11,15 @@ def save_config_to_file(filename, data):
 def update_setting(btn, num, name):
     settings[btn]['num'] = num
     settings[btn]['name'] = name
-    save_config_to_file('savetest.json', settings)
+    save_config_to_file('config.json', settings)
 
+    
 # 設定ファイルを読み込む
-SETTINGS_FILE = r'./assets/config.json'
-settings = load_config_from_file(SETTINGS_FILE)
+try:
+    SETTINGS_FILE = r'config.json'
+    settings = load_config_from_file(SETTINGS_FILE)
+except:
+    DEFAULT_SETTINGS_FILE = r'./assets/config.json'
+    save_config_to_file('config.json', load_config_from_file(DEFAULT_SETTINGS_FILE))
+    settings = load_config_from_file(SETTINGS_FILE)
+    print('config.jsonを作成したよ！')

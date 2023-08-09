@@ -30,6 +30,8 @@ class CameraPreview(Preview):
     image_texture = ObjectProperty(None)
     image_capture = ObjectProperty(None)
     camera = ObjectProperty(None)
+    btn4_name = StringProperty()
+    btn4_name = config_manager.settings['btn4']['name']
 
     def __init__(self, **kwargs):
         super(CameraPreview, self).__init__(**kwargs)
@@ -69,6 +71,7 @@ class CameraPreview(Preview):
 
     def update_button(self):
         config_manager.update_setting('btn4', 12, 'おけまる')
+        self.btn4_name = config_manager.settings['btn4']['name']
 
     def load_button(self):
         config_manager.load_config_from_file('savetest.json')
