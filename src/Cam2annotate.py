@@ -66,12 +66,19 @@ class CameraPreview(Preview):
         pass
 
     def save_button(self):
-        settings = config_manager.settings
-        config_manager.save_config_to_file('savetest.json', settings)
+        # settings = config_manager.settings
+        # config_manager.save_config_to_file('savetest.json', settings)
+        print(self.btn4_name)
 
     def update_button(self):
         config_manager.update_setting('btn4', 12, 'おけまる')
         self.btn4_name = config_manager.settings['btn4']['name']
 
     def load_button(self):
-        config_manager.load_config_from_file('savetest.json')
+        settings = config_manager.load_config_from_file(r'./assets/config.json')
+        config_manager.save_config_to_file('config.json', settings)
+        self.btn4_name = settings['btn4']['name']
+
+    def change_button_text(self, value):
+        print('test')
+        pass
