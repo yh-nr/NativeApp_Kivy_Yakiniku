@@ -27,6 +27,7 @@ Screen:
                     bold:True
                     center: root.width * 0.3, root.height * 0.3
                     on_press:camerapreview.capture_button(self)
+                    on_long_press:camerapreview.popup_open(self)
 
                 ATButton:
                     custom_id: 'btn1'
@@ -38,6 +39,7 @@ Screen:
                     bold:True
                     center: root.width * 0.3, root.height * 0.3
                     on_press:camerapreview.capture_button(self)
+                    on_long_press:camerapreview.popup_open(self)
 
                 ATButton:
                     custom_id: 'btn2'
@@ -49,6 +51,7 @@ Screen:
                     bold:True
                     center: root.width * 0.3, root.height * 0.3
                     on_press:camerapreview.capture_button(self)
+                    on_long_press:camerapreview.popup_open(self)
 
                 ATButton:
                     custom_id: 'btn3'
@@ -60,6 +63,7 @@ Screen:
                     bold:True
                     center: root.width * 0.3, root.height * 0.3
                     on_press:camerapreview.capture_button(self)
+                    on_long_press:camerapreview.popup_open(self)
 
                 ATButton:
                     custom_id: 'btn4'
@@ -71,6 +75,7 @@ Screen:
                     bold:True
                     center: root.width * 0.3, root.height * 0.3
                     on_press:camerapreview.capture_button(self)
+                    on_long_press:camerapreview.popup_open(self)
 
                 ATButton:
                     custom_id: 'btn5'
@@ -82,6 +87,7 @@ Screen:
                     bold:True
                     center: root.width * 0.3, root.height * 0.3
                     on_press:camerapreview.capture_button(self)
+                    on_long_press:camerapreview.popup_open(self)
 
                 ATButton:
                     custom_id: 'btn6'
@@ -93,6 +99,7 @@ Screen:
                     bold:True
                     center: root.width * 0.3, root.height * 0.3
                     on_press:camerapreview.capture_button(self)
+                    on_long_press:camerapreview.popup_open(self)
 
                 ATButton:
                     custom_id: 'btn7'
@@ -104,6 +111,7 @@ Screen:
                     bold:True
                     center: root.width * 0.3, root.height * 0.3
                     on_press:camerapreview.capture_button(self)
+                    on_long_press:camerapreview.popup_open(self)
 
                 ATButton:
                     custom_id: 'btn8'
@@ -115,6 +123,7 @@ Screen:
                     bold:True
                     center: root.width * 0.3, root.height * 0.3
                     on_press:camerapreview.capture_button(self)
+                    on_long_press:camerapreview.popup_open(self)
 
                 ATButton:
                     custom_id: 'btn9'
@@ -126,6 +135,7 @@ Screen:
                     bold:True
                     center: root.width * 0.3, root.height * 0.3
                     on_press:camerapreview.capture_button(self)
+                    on_long_press:camerapreview.popup_open(self)
 
                 ATButton:
                     custom_id: 'btn10'
@@ -137,6 +147,7 @@ Screen:
                     bold:True
                     center: root.width * 0.3, root.height * 0.3
                     on_press:camerapreview.capture_button(self)
+                    on_long_press:camerapreview.popup_open(self)
 
                 ATButton:
                     custom_id: 'btn11'
@@ -148,6 +159,7 @@ Screen:
                     bold:True
                     center: root.width * 0.3, root.height * 0.3
                     on_press:camerapreview.capture_button(self)
+                    on_long_press:camerapreview.popup_open(self)
 
             BoxLayout:
                 size_hint_y: 0.2
@@ -160,41 +172,35 @@ Screen:
                     on_press:camerapreview.play()
                                         
                 Button:
-                    text: "おけまる"
+                    text: "Load Default"
                     background_color: 1,1,1,0
                     color: 1,.3,.3,.5
                     font_size:35
                     bold:True
-                    on_press:camerapreview.update_setting('btn4', 12, 'おけまる')
+                    on_press:camerapreview.load_button()
                     
-                Button:
-                    text: "コリコリ"
-                    background_color: 1,1,1,0
-                    color: 1,.3,.3,.5
-                    font_size:35
-                    bold:True
-                    on_press:camerapreview.update_setting('btn4', 4, 'コリコリ')
-                    
-                Button:
-                    text: "ポップアップ"
-                    background_color: 1,1,1,0
-                    color: 1,.3,.3,.5
-                    font_size:35
-                    bold:True
-                    on_press:camerapreview.popup_open()
-
 <CameraWidget@Widget>:
             
 
 <PopupMenu>
     orientation: 'vertical'
     id:popup_menu
+    popup_text: ['btn4','4','コリコリ']
+    title:root.popup_text[0]
 
-    Label:
-        text: 'Please Close Button'
-        center: root.center
+    TextInput:
+        id: input2
+        input_filter: 'int'
+        text: root.popup_text[1]
+        multiline:False
 
-    BoxLayout:
-        Button:
-            text: 'Close'
-            on_release: root.popup_close()
+    TextInput:
+        id: input3
+        text: root.popup_text[2]
+        multiline:False
+
+    Button:
+        text: 'Submit&Close'
+        on_release: 
+            root.update_setting(root.popup_text[0], input2.text, input3.text)
+            root.popup_close()

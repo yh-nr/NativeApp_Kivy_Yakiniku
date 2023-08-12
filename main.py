@@ -45,6 +45,7 @@ class AppFrame(BoxLayout):
     def switch2page(self, page_name):
         sm = self.screen_manager
         curdir = dirname(__file__)
+        Builder.unload_file(join(curdir, f'src/{page_name}.kv'))
         screen = Builder.load_file(join(curdir, f'src/{page_name}.kv'))
         sm.switch_to(screen, direction='left')
 

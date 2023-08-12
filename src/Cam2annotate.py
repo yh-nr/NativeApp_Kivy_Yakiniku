@@ -16,7 +16,29 @@ import datetime
 # lastpic_path = 'あいうえお'
 
 class ATButton(Button):
-    custom_id = StringProperty('')
+    def __init__(self, **kwargs):
+        super(ATButton, self).__init__(**kwargs)
+        self.register_event_type('on_long_press')
+        self.long_press_time = 0.5  # 長押しとして認識するまでの時間（秒）
+        self._long_press_clock = None
+
+    def on_touch_down(self, touch):
+        if super(ATButton, self).on_touch_down(touch):
+            self._long_press_clock = Clock.schedule_once(self._do_long_press, self.long_press_time)
+            return True
+        return False
+
+    def on_touch_up(self, touch):
+        if self._long_press_clock:
+            Clock.unschedule(self._long_press_clock)
+            self._long_press_clock = None
+        return super(ATButton, self).on_touch_up(touch)
+    
+    def _do_long_press(self, dt):
+        self.dispatch('on_long_press')
+
+    def on_long_press(self):
+        pass
 
 class CameraPreview(Preview):
     image_texture = ObjectProperty(None)
@@ -77,13 +99,20 @@ class CameraPreview(Preview):
         print('test')
         pass
 
-    def popup_open(self):
-        content = PopupMenu(popup_close=self.popup_close)
-        self.popup = Popup(title='Popup Test', content=content, size_hint=(0.5, 0.5), auto_dismiss=False)
+    def popup_open(self, instance):
+        settings = config_manager.settings
+        btn = instance.custom_id
+        num = str(settings[btn]['num'])
+        name = settings[instance.custom_id]['name']
+        popup_text = [btn, num, name]
+        content = PopupMenu(popup_text=popup_text, popup_close=self.popup_close, update_setting=self.update_setting)
+        self.popup = Popup(title=f'ボタン{btn.replace("btn","")}の割当を変更', content=content, size_hint=(0.5, 0.5), auto_dismiss=True)
         self.popup.open()
 
     def popup_close(self):
         self.popup.dismiss()
 
 class PopupMenu(BoxLayout):
+    popup_text = ListProperty()
+    update_setting = ObjectProperty(None)
     popup_close = ObjectProperty(None)
