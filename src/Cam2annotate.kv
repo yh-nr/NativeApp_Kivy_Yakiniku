@@ -19,7 +19,7 @@ Screen:
 
                 ATButton:
                     custom_id: 'btn0'
-                    text: camerapreview.get_button_text(self)
+                    text: camerapreview.btn_name[0]
                     background_color: 1,1,1,0
                     color: 1,1,1,.8
                     font_size:35
@@ -30,7 +30,7 @@ Screen:
 
                 ATButton:
                     custom_id: 'btn1'
-                    text: camerapreview.get_button_text(self)
+                    text: camerapreview.btn_name[1]
                     background_color: 1,1,1,0
                     color: 1,1,1,.8
                     font_size:35
@@ -41,7 +41,7 @@ Screen:
 
                 ATButton:
                     custom_id: 'btn2'
-                    text: camerapreview.get_button_text(self)
+                    text: camerapreview.btn_name[2]
                     background_color: 1,1,1,0
                     color: 1,1,1,.8
                     font_size:35
@@ -52,7 +52,7 @@ Screen:
 
                 ATButton:
                     custom_id: 'btn3'
-                    text: camerapreview.get_button_text(self)
+                    text: camerapreview.btn_name[3]
                     background_color: 1,1,1,0
                     color: 1,1,1,.8
                     font_size:35
@@ -63,7 +63,7 @@ Screen:
 
                 ATButton:
                     custom_id: 'btn4'
-                    text: camerapreview.btn4_name
+                    text: camerapreview.btn_name[4]
                     background_color: 1,1,1,0
                     color: 1,1,1,.8
                     font_size:35
@@ -74,7 +74,7 @@ Screen:
 
                 ATButton:
                     custom_id: 'btn5'
-                    text: camerapreview.get_button_text(self)
+                    text: camerapreview.btn_name[5]
                     background_color: 1,1,1,0
                     color: 1,1,1,.8
                     font_size:35
@@ -85,7 +85,7 @@ Screen:
 
                 ATButton:
                     custom_id: 'btn6'
-                    text: camerapreview.get_button_text(self)
+                    text: camerapreview.btn_name[6]
                     background_color: 1,1,1,0
                     color: 1,1,1,.8
                     font_size:35
@@ -96,7 +96,7 @@ Screen:
 
                 ATButton:
                     custom_id: 'btn7'
-                    text: camerapreview.get_button_text(self)
+                    text: camerapreview.btn_name[7]
                     background_color: 1,1,1,0
                     color: 1,1,1,.8
                     font_size:35
@@ -107,7 +107,7 @@ Screen:
 
                 ATButton:
                     custom_id: 'btn8'
-                    text: camerapreview.get_button_text(self)
+                    text: camerapreview.btn_name[8]
                     background_color: 1,1,1,0
                     color: 1,1,1,.8
                     font_size:35
@@ -118,7 +118,7 @@ Screen:
 
                 ATButton:
                     custom_id: 'btn9'
-                    text: camerapreview.get_button_text(self)
+                    text: camerapreview.btn_name[9]
                     background_color: 1,1,1,0
                     color: 1,1,1,.8
                     font_size:35
@@ -129,7 +129,7 @@ Screen:
 
                 ATButton:
                     custom_id: 'btn10'
-                    text: camerapreview.get_button_text(self)
+                    text: camerapreview.btn_name[10]
                     background_color: 1,1,1,0
                     color: 1,1,1,.8
                     font_size:35
@@ -140,7 +140,7 @@ Screen:
 
                 ATButton:
                     custom_id: 'btn11'
-                    text: camerapreview.get_button_text(self)
+                    text: camerapreview.btn_name[11]
                     background_color: 1,1,1,0
                     color: 1,1,1,.8
                     font_size:35
@@ -158,22 +158,14 @@ Screen:
                     font_size:35
                     bold:True
                     on_press:camerapreview.play()
-                    
-                Button:
-                    text: "print"
-                    background_color: 1,1,1,0
-                    color: 1,.3,.3,.5
-                    font_size:35
-                    bold:True
-                    on_press:camerapreview.save_button()
-                    
+                                        
                 Button:
                     text: "おけまる"
                     background_color: 1,1,1,0
                     color: 1,.3,.3,.5
                     font_size:35
                     bold:True
-                    on_press:camerapreview.update_button('btn4', 12, 'おけまる')
+                    on_press:camerapreview.update_setting('btn4', 12, 'おけまる')
                     
                 Button:
                     text: "コリコリ"
@@ -181,16 +173,28 @@ Screen:
                     color: 1,.3,.3,.5
                     font_size:35
                     bold:True
-                    on_press:camerapreview.update_button('btn4', 4, 'コリコリ')
+                    on_press:camerapreview.update_setting('btn4', 4, 'コリコリ')
                     
                 Button:
-                    text: "load"
+                    text: "ポップアップ"
                     background_color: 1,1,1,0
                     color: 1,.3,.3,.5
                     font_size:35
                     bold:True
-                    on_press:camerapreview.load_button()
+                    on_press:camerapreview.popup_open()
 
 <CameraWidget@Widget>:
             
 
+<PopupMenu>
+    orientation: 'vertical'
+    id:popup_menu
+
+    Label:
+        text: 'Please Close Button'
+        center: root.center
+
+    BoxLayout:
+        Button:
+            text: 'Close'
+            on_release: root.popup_close()
