@@ -30,8 +30,7 @@ class CameraPreview(Preview):
     image_texture = ObjectProperty(None)
     image_capture = ObjectProperty(None)
     camera = ObjectProperty(None)
-    btn4_name = StringProperty()
-    btn4_name = config_manager.settings['btn4']['name']
+    btn4_name = StringProperty(config_manager.settings['btn4']['name'])
 
     def __init__(self, **kwargs):
         super(CameraPreview, self).__init__(**kwargs)
@@ -65,19 +64,16 @@ class CameraPreview(Preview):
         self.capture_photo(subdir=subdir ,name=name)
         pass
 
-    def save_button(self):
-        # settings = config_manager.settings
-        # config_manager.save_config_to_file('savetest.json', settings)
-        print(self.btn4_name)
 
-    def update_button(self):
-        config_manager.update_setting('btn4', 12, 'おけまる')
-        self.btn4_name = config_manager.settings['btn4']['name']
+    def update_button(self, btn, num, name):
+        setting = config_manager.update_setting(btn, num, name)
+        print(setting)
+        self.btn4_name = setting[btn]['name']
 
     def load_button(self):
-        settings = config_manager.load_config_from_file(r'./assets/config.json')
-        config_manager.save_config_to_file('config.json', settings)
-        self.btn4_name = settings['btn4']['name']
+        setting = config_manager.load_config_from_file(r'./assets/config.json')
+        config_manager.save_config_to_file('config.json', setting)
+        self.btn4_name = setting['btn4']['name']
 
     def change_button_text(self, value):
         print('test')

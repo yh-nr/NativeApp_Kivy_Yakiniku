@@ -19,6 +19,7 @@ def update_setting(btn, num, name):
     settings[btn]['num'] = num
     settings[btn]['name'] = name
     save_config_to_file(SETTINGS_FILE, settings)
+    return settings
 
 def initialize_settings():
     global settings
